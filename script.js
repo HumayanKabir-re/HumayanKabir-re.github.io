@@ -360,6 +360,30 @@ function setupActiveSection() {
     });
 }
 
+// Back to Top Button
+function setupBackToTop() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    if (!backToTopButton) return;
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 500) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    });
+    
+    // Smooth scroll to top when clicked
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Add loading class to body
@@ -383,6 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCopyToClipboard();
     setupProjectCardEffects();
     setupActiveSection();
+    setupBackToTop();
     setupVisitorCounter();
     
     // Complete loading after everything is initialized
@@ -406,24 +431,35 @@ async function setupVisitorCounter() {
     const visitorCountElement = document.getElementById('visitorCount');
     const visitorLocationElement = document.getElementById('visitorLocation');
     
-    // Get current count from localStorage
-    let visitCount = localStorage.getItem('portfolioVisitCount');
+    // Check if this is a unique visit (using session-based tracking)
+    const sessionKey = 'portfolioSessionActive';
+    const countKey = 'portfolioVisitCount';
+    const lastVisitKey = 'portfolioLastVisit';
     
-    if (!visitCount) {
-        visitCount = 0;
+    let visitCount = parseInt(localStorage.getItem(countKey)) || 0;
+    const isActiveSession = sessionStorage.getItem(sessionKey);
+    const lastVisit = parseInt(localStorage.getItem(lastVisitKey)) || 0;
+    const now = Date.now();
+    const thirtyMinutes = 30 * 60 * 1000; // 30 minutes in milliseconds
+    
+    // Only increment if:
+    // 1. No active session (new tab/window), OR
+    // 2. More than 30 minutes since last visit
+    if (!isActiveSession && (now - lastVisit > thirtyMinutes)) {
+        visitCount++;
+        localStorage.setItem(countKey, visitCount);
+        localStorage.setItem(lastVisitKey, now);
+        sessionStorage.setItem(sessionKey, 'true');
+        console.log('✅ New unique visit counted');
+    } else {
+        console.log('⏭️ Same session - not counting');
     }
-    
-    // Increment count
-    visitCount = parseInt(visitCount) + 1;
-    
-    // Save back to localStorage
-    localStorage.setItem('portfolioVisitCount', visitCount);
     
     // Animate counter
     let currentCount = 0;
     const targetCount = visitCount;
-    const duration = 2000; // 2 seconds
-    const increment = targetCount / (duration / 16); // 60fps
+    const duration = 2000;
+    const increment = targetCount / (duration / 16);
     
     const counterInterval = setInterval(() => {
         currentCount += increment;
@@ -434,46 +470,117 @@ async function setupVisitorCounter() {
         visitorCountElement.textContent = Math.floor(currentCount).toLocaleString();
     }, 16);
     
-    // Fetch visitor location using free ipapi.co API
+    // Fetch visitor location using multiple free APIs with fallbacks
+    // Note: When running locally (localhost/127.0.0.1), APIs return server location, not your real location
+    // This is normal - it will work correctly when deployed to GitHub Pages
+    
     try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
+        console.log('🌍 Detecting location...');
         
-        // Format location string
+        // Try ipapi.co first (most accurate, but has rate limits)
+        let response = await fetch('https://ipapi.co/json/');
+        let data = await response.json();
+        
+        console.log('📡 API Response:', data);
+        
         let locationText = '';
+        let countryCode = '';
         
-        if (data.city && data.country_name) {
-            locationText = `${data.city}, ${data.country_name}`;
-        } else if (data.country_name) {
-            locationText = data.country_name;
-        } else if (data.country) {
-            locationText = data.country;
+        // Check if we got valid data (not rate limited)
+        if (data && !data.error && data.country_name) {
+            const city = data.city || '';
+            const country = data.country_name || '';
+            countryCode = data.country_code || '';
+            
+            if (city && country) {
+                locationText = `${city}, ${country}`;
+            } else if (country) {
+                locationText = country;
+            }
+            
+            console.log('✅ ipapi.co successful');
         } else {
-            locationText = 'Unknown Location';
+            console.log('⚠️ ipapi.co failed or rate limited, trying fallback...');
+            
+            // Fallback #1: ip-api.com (no rate limits, very reliable)
+            response = await fetch('http://ip-api.com/json/');
+            data = await response.json();
+            
+            console.log('📡 Fallback API Response:', data);
+            
+            if (data && data.status === 'success') {
+                const city = data.city || '';
+                const country = data.country || '';
+                countryCode = data.countryCode || '';
+                
+                if (city && country) {
+                    locationText = `${city}, ${country}`;
+                } else if (country) {
+                    locationText = country;
+                }
+                
+                console.log('✅ ip-api.com successful');
+            }
         }
         
-        // Add flag emoji if available
-        if (data.country_code) {
-            const flag = getFlagEmoji(data.country_code);
+        // Add flag emoji if we have country code
+        if (countryCode) {
+            const flag = getFlagEmoji(countryCode);
             locationText = `${flag} ${locationText}`;
         }
         
-        visitorLocationElement.textContent = locationText;
-        
-        console.log('📍 Location detected:', locationText);
-        console.log('🌍 Full location data:', {
-            city: data.city,
-            region: data.region,
-            country: data.country_name,
-            ip: data.ip
-        });
+        if (locationText) {
+            visitorLocationElement.textContent = locationText;
+            console.log('📍 Location detected:', locationText);
+        } else {
+            throw new Error('No location data received from any API');
+        }
         
     } catch (error) {
-        console.error('Location detection failed:', error);
-        visitorLocationElement.textContent = 'Location unavailable';
+        console.error('❌ Location detection failed:', error);
+        
+        // Ultimate fallback - try to guess from browser language
+        try {
+            const userLang = navigator.language || navigator.userLanguage;
+            console.log('🌐 Browser language:', userLang);
+            
+            const langParts = userLang.split('-');
+            const countryCode = langParts[1]; // e.g., 'en-US' -> 'US'
+            
+            if (countryCode && countryCode.length === 2) {
+                const flag = getFlagEmoji(countryCode);
+                const countryNames = {
+                    'US': 'United States',
+                    'GB': 'United Kingdom',
+                    'CA': 'Canada',
+                    'AU': 'Australia',
+                    'BD': 'Bangladesh',
+                    'IN': 'India',
+                    'PK': 'Pakistan',
+                    'JP': 'Japan',
+                    'CN': 'China',
+                    'DE': 'Germany',
+                    'FR': 'France'
+                };
+                const countryName = countryNames[countryCode] || 'Unknown';
+                visitorLocationElement.textContent = `${flag} ${countryName} (estimated)`;
+                console.log('📍 Estimated location from browser:', countryName);
+            } else {
+                visitorLocationElement.textContent = '🌍 Global visitor';
+            }
+        } catch (e) {
+            visitorLocationElement.textContent = '🌍 Global visitor';
+            console.log('📍 Could not detect location, showing global');
+        }
     }
     
-    console.log(`👁️ Visit count: ${visitCount}`);
+    console.log(`👁️ Total unique visits: ${visitCount}`);
+    
+    // Important note for local development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.log('⚠️ RUNNING LOCALLY: Location detection may show server/VPN location, not your real location.');
+        console.log('✅ This will work correctly when deployed to GitHub Pages.');
+    }
 }
 
 // Convert country code to flag emoji
