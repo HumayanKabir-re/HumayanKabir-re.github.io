@@ -68,7 +68,14 @@ class NeuralNetwork {
         this.ctx = canvas.getContext('2d');
         this.particles = [];
         this.connections = [];
-        this.particleCount = 80;
+        
+        // Detect mobile devices
+        this.isMobile = window.innerWidth <= 768 || 
+                       ('ontouchstart' in window) || 
+                       (navigator.maxTouchPoints > 0);
+        
+        // Adjust particle count based on device
+        this.particleCount = this.isMobile ? 35 : 80; // 60% fewer on mobile
         this.maxDistance = 150;
         this.mouse = { x: null, y: null, radius: 150 };
         
@@ -76,12 +83,41 @@ class NeuralNetwork {
         this.init();
         this.animate();
         
-        window.addEventListener('resize', () => this.resize());
+        // Update particle count on resize
+        window.addEventListener('resize', () => {
+            const wasMobile = this.isMobile;
+            this.isMobile = window.innerWidth <= 768 || 
+                           ('ontouchstart' in window) || 
+                           (navigator.maxTouchPoints > 0);
+            
+            // Reinitialize if device type changed
+            if (wasMobile !== this.isMobile) {
+                this.particleCount = this.isMobile ? 35 : 80;
+                this.init();
+            }
+            this.resize();
+        });
+        
         canvas.addEventListener('mousemove', (e) => {
             this.mouse.x = e.x;
             this.mouse.y = e.y;
         });
+        
+        // Add touch support for mobile
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            this.mouse.x = touch.clientX - rect.left + window.scrollX;
+            this.mouse.y = touch.clientY - rect.top + window.scrollY;
+        });
+        
         canvas.addEventListener('mouseleave', () => {
+            this.mouse.x = null;
+            this.mouse.y = null;
+        });
+        
+        canvas.addEventListener('touchend', () => {
             this.mouse.x = null;
             this.mouse.y = null;
         });
@@ -143,31 +179,31 @@ class NeuralNetwork {
                 }
             }
             
-            // Draw particle - MUCH BRIGHTER AND MORE VISIBLE
+            // Draw particle - SIZE BASED ON DEVICE
+            const particleSize = this.isMobile ? particle.radius * 1.3 : particle.radius * 1.5;
             this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.radius * 1.5, 0, Math.PI * 2);
-            this.ctx.fillStyle = 'rgba(0, 217, 255, 0.95)'; // Increased from 0.7 to 0.95
+            this.ctx.arc(particle.x, particle.y, particleSize, 0, Math.PI * 2);
+            this.ctx.fillStyle = 'rgba(0, 217, 255, 0.95)';
             this.ctx.fill();
             
             // Add glow effect to particles
-            this.ctx.shadowBlur = 8;
+            this.ctx.shadowBlur = this.isMobile ? 4 : 8;
             this.ctx.shadowColor = 'rgba(0, 217, 255, 0.8)';
             this.ctx.fill();
             this.ctx.shadowBlur = 0;
             
-            // Draw connections - MUCH THICKER AND BRIGHTER
+            // Draw connections - THINNER ON MOBILE
             for (let j = i + 1; j < this.particles.length; j++) {
                 const dx = this.particles[j].x - particle.x;
                 const dy = this.particles[j].y - particle.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 
                 if (distance < this.maxDistance) {
-                    // INCREASED OPACITY: from 0.5 to 0.8 (much more visible)
                     const opacity = (1 - distance / this.maxDistance) * 0.8;
                     this.ctx.beginPath();
                     this.ctx.strokeStyle = `rgba(0, 217, 255, ${opacity})`;
-                    // INCREASED LINE WIDTH: from 1.5 to 2.5 (much thicker)
-                    this.ctx.lineWidth = 2.5;
+                    // THINNER LINES ON MOBILE: 1.5 on mobile, 2.5 on desktop
+                    this.ctx.lineWidth = this.isMobile ? 1.5 : 2.5;
                     this.ctx.moveTo(particle.x, particle.y);
                     this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
                     this.ctx.stroke();
