@@ -75,7 +75,7 @@ class NeuralNetwork {
                        (navigator.maxTouchPoints > 0);
         
         // Adjust particle count based on device
-        this.particleCount = this.isMobile ? 35 : 80; // 60% fewer on mobile
+        this.particleCount = this.isMobile ? 25 : 80; // 10 fewer on mobile
         this.maxDistance = 150;
         this.mouse = { x: null, y: null, radius: 150 };
         
@@ -92,7 +92,7 @@ class NeuralNetwork {
             
             // Reinitialize if device type changed
             if (wasMobile !== this.isMobile) {
-                this.particleCount = this.isMobile ? 35 : 80;
+                this.particleCount = this.isMobile ? 25 : 80;
                 this.init();
             }
             this.resize();
