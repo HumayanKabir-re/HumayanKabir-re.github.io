@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Humayan Kabir - ML Engineer & AI Researcher</title>
-    <meta name="description" content="ML Engineer with 2+ years of experience in Deep Learning, LLMs, GenAI, and real-time data pipelines. Specializing in building scalable AI solutions.">
+    <meta name="description" content="ML Engineer with 3+ years of experience in Deep Learning, LLMs, GenAI, and real-time data pipelines. Specializing in building scalable AI solutions.">
     <meta name="keywords" content="Machine Learning, Deep Learning, AI Engineer, LLM, GenAI, Data Pipelines, PyTorch, TensorFlow, Python, DevOps">
     <meta name="author" content="Humayan Kabir">
     
@@ -12,14 +12,14 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://humayankabir-re.github.io/">
     <meta property="og:title" content="Humayan Kabir - ML Engineer & AI Researcher">
-    <meta property="og:description" content="ML Engineer specializing in Deep Learning, LLMs & GenAI with 2+ years building scalable AI solutions and real-time data pipelines">
+    <meta property="og:description" content="ML Engineer specializing in Deep Learning, LLMs & GenAI with 3+ years building scalable AI solutions and real-time data pipelines">
     <meta property="og:image" content="https://humayankabir-re.github.io/profile-photo.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://humayankabir-re.github.io/">
     <meta property="twitter:title" content="Humayan Kabir - ML Engineer & AI Researcher">
-    <meta property="twitter:description" content="ML Engineer specializing in Deep Learning, LLMs & GenAI with 2+ years building scalable AI solutions">
+    <meta property="twitter:description" content="ML Engineer specializing in Deep Learning, LLMs & GenAI with 3+ years building scalable AI solutions">
     <meta property="twitter:image" content="https://humayankabir-re.github.io/profile-photo.png">
     
     <!-- Favicon -->
@@ -29,6 +29,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Force browser to load latest versions -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     
     <!-- Google Analytics (Optional - Uncomment and add your tracking ID) -->
     <!--
@@ -96,7 +101,7 @@
                         </h2>
                     </div>
                     <p class="hero-description">
-                        ML Engineer specializing in Deep Learning, LLMs & GenAI with 2+ years building 
+                        ML Engineer specializing in Deep Learning, LLMs & GenAI with 3+ years building 
                         scalable AI solutions and real-time data pipelines
                     </p>
                     <div class="hero-cta">
@@ -157,7 +162,7 @@
                     </p>
                     <p>
                         With a <strong>B.Sc. in Computer Science & Engineering (Machine Learning major)</strong> from 
-                        North South University and over 2 years of professional experience, I specialize in deep learning, 
+                        North South University and over 3 years of professional experience, I specialize in deep learning, 
                         LLMs, and GenAI applications.
                     </p>
                     <p>
@@ -172,7 +177,7 @@
                     </p>
                     <div class="about-highlights">
                         <div class="highlight-item">
-                            <div class="highlight-number">2+</div>
+                            <div class="highlight-number">3+</div>
                             <div class="highlight-label">Years Experience</div>
                         </div>
                         <div class="highlight-item">
@@ -236,7 +241,7 @@
                         <ul class="timeline-description">
                             <li>Functionally led full-stack development of high-availability monitoring systems, achieving zero downtime through parallel processing nodes (Zabbix, Grafana)</li>
                             <li>Automated maintenance and optimized monitoring stack, reducing CPU usage by 20-40%, storage by 50%, and improving alert processing by 15%</li>
-                            <li>Guided 2+ new hires through hands-on onboarding, fostering team integration</li>
+                            <li>Guided 3+ new hires through hands-on onboarding, fostering team integration</li>
                             <li>Collaborated with global teams to implement productivity-enhancing tools</li>
                         </ul>
                         <div class="timeline-tags">
@@ -648,6 +653,56 @@
 
     <script src="script.js"></script>
     
+    <!-- Dynamic cache busting - always loads latest files -->
+    <script>
+        (function() {
+            // Generate timestamp-based version
+            const version = new Date().getTime();
+            
+            // Get all script and link tags
+            const scripts = document.querySelectorAll('script[src]');
+            const links = document.querySelectorAll('link[rel="stylesheet"]');
+            
+            // Add timestamp to script tags (except this one)
+            scripts.forEach(script => {
+                const src = script.getAttribute('src');
+                if (src && !src.includes('?') && !src.includes('googleapis')) {
+                    script.setAttribute('src', src + '?v=' + version);
+                }
+            });
+            
+            // Add timestamp to CSS links
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && !href.includes('?') && !href.includes('googleapis')) {
+                    link.setAttribute('href', href + '?v=' + version);
+                }
+            });
+            
+            console.log('%c🔄 Dynamic Cache Busting Active', 'color: #00d9ff; font-size: 14px; font-weight: bold;');
+            console.log('📅 Version:', version);
+            console.log('✅ All files will load fresh on every visit');
+        })();
+    </script>
+    
+    <!-- Debug: Verify version loaded -->
+    <script>
+        console.log('%c🔍 Portfolio Version Check', 'color: #00d9ff; font-size: 16px; font-weight: bold;');
+        console.log('📱 User Agent:', navigator.userAgent);
+        console.log('📏 Screen Width:', window.innerWidth);
+        console.log('👆 Touch Support:', 'ontouchstart' in window);
+        console.log('---');
+        
+        // Check if mobile detection is working after script loads
+        setTimeout(() => {
+            const canvas = document.getElementById('neural-network');
+            if (canvas && canvas.getContext) {
+                console.log('✅ Canvas found');
+                console.log('📦 Canvas size:', canvas.width, 'x', canvas.height);
+            }
+        }, 2000);
+    </script>
+    
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -655,7 +710,7 @@
         "@type": "Person",
         "name": "Humayan Kabir",
         "jobTitle": "Machine Learning Engineer",
-        "description": "ML Engineer specializing in Deep Learning, LLMs, and GenAI with 2+ years of experience",
+        "description": "ML Engineer specializing in Deep Learning, LLMs, and GenAI with 3+ years of experience",
         "url": "https://humayankabir-re.github.io/",
         "image": "https://humayankabir-re.github.io/profile-photo.png",
         "email": "humayan.kabir.official@gmail.com",
