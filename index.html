@@ -70,8 +70,8 @@
             <a href="#hero" class="nav-logo">HK<span class="cursor-blink">_</span></a>
             <div class="nav-menu" id="navMenu">
                 <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a> <!--- Move above experience --->
                 <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#contact" class="nav-link nav-link-cta">Contact</a>
             </div>
@@ -203,108 +203,7 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section class="experience" id="experience">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">// MY JOURNEY</span>
-                <h2 class="section-title">Professional Experience</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item" data-animate>
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Jul 2024 - Present</div>
-                        <h3 class="timeline-title">Independent AI Projects</h3>
-                        <div class="timeline-subtitle">LLM Tools, Cloud Tools, Security & Education</div>
-                        <div class="timeline-location">Dhaka, Bangladesh</div>
-                        <ul class="timeline-description">
-                            <li>Researched ML/AI-based approaches to enhance cybersecurity, prototyping anomaly detection and encryption integrity tools using PyTorch and TensorFlow</li>
-                            <li>Explored symbolic regression using CNN and transformer models on real and synthetic datasets, inspired by the AI-Feynman research project</li>
-                            <li>Designed modular cloud automation pipelines with LLM integration to support analytics and data workflows</li>
-                            <li>Prototyped an AI-driven educational assistant to enhance learning outcomes using CNN</li>
-                        </ul>
-                        <div class="timeline-tags">
-                            <span class="tag">PyTorch</span>
-                            <span class="tag">TensorFlow</span>
-                            <span class="tag">LangChain</span>
-                            <span class="tag">FAISS</span>
-                            <span class="tag">S3</span>
-                            <span class="tag">AWS</span>
-                            <span class="tag">FastAPI</span>
-                            <span class="tag">CNN</span>
-                            <span class="tag">Transformers</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item" data-animate>
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Jan 2023 - Jun 2024</div>
-                        <h3 class="timeline-title">Specialist OSS Developer (Associate)</h3>
-                        <div class="timeline-subtitle">Banglalink Digital Communication Ltd</div>
-                        <div class="timeline-location">Dhaka, Bangladesh</div>
-                        <ul class="timeline-description">
-                            <li>Functionally led full-stack development of high-availability monitoring systems, achieving zero downtime through parallel processing nodes (Zabbix, Grafana)</li>
-                            <li>Automated maintenance and optimized monitoring stack, reducing CPU usage by 20-40%, storage by 50%, and improving alert processing by 15%</li>
-                            <li>Guided 3+ new hires through hands-on onboarding, fostering team integration</li>
-                            <li>Collaborated with global teams to implement productivity-enhancing tools</li>
-                        </ul>
-                        <div class="timeline-tags">
-                            <span class="tag">Zabbix</span>
-                            <span class="tag">Grafana</span>
-                            <span class="tag">DevOps</span>
-                            <span class="tag">Automated Maintenance</span>
-                            <span class="tag">Automated Event Handling</span>
-                            <span class="tag">PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item" data-animate>
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Oct 2022 - Dec 2022</div>
-                        <h3 class="timeline-title">Big Data Analyst (Associate)</h3>
-                        <div class="timeline-subtitle">Banglalink Digital Communication Ltd</div>
-                        <div class="timeline-location">Dhaka, Bangladesh</div>
-                        <ul class="timeline-description">
-                            <li>Collaborated on scalable CDR data pipelines supporting real-time KPI monitoring and feature engineering for ML analysis</li>
-                            <li>Explored and tested distributed Big Data/ETL tools in collaborative environment (HDFS, Spark, Airflow)</li>
-                            <li>Guided 2+ colleagues in skill development, promoting team sustainability</li>
-                        </ul>
-                        <div class="timeline-tags">
-                            <span class="tag">Apache Spark</span>
-                            <span class="tag">Apache Airflow</span>
-                            <span class="tag">HDFS</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item" data-animate>
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Jan 2022 - Sep 2022</div>
-                        <h3 class="timeline-title">Python DevOps Engineer</h3>
-                        <div class="timeline-subtitle">Shurjomukhi Solutions Ltd</div>
-                        <div class="timeline-location">Dhaka, Bangladesh</div>
-                        <ul class="timeline-description">
-                            <li>Built and deployed containerized Django REST platform in Agile sprints aligned with investor goals</li>
-                            <li>Collaborated cross-functionally with ML team to design and deploy image recognition models</li>
-                            <li>Mentored 4+ junior developers through hands-on guidance, facilitating tool adoption</li>
-                        </ul>
-                        <div class="timeline-tags">
-                            <span class="tag">Django REST</span>
-                            <span class="tag">Docker</span>
-                            <span class="tag">MySQL</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- Moved Up Here From After Experience Section -->
     <!-- Projects Section -->
     <section class="projects" id="projects">
         <div class="container">
@@ -537,6 +436,111 @@
         </div>
     </section>
 
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// MY JOURNEY</span>
+                <h2 class="section-title">Professional Experience</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item" data-animate>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Jul 2024 - Present</div>
+                        <h3 class="timeline-title">Independent AI Projects</h3>
+                        <div class="timeline-subtitle">LLM Tools, Cloud Tools, Security & Education</div>
+                        <div class="timeline-location">Dhaka, Bangladesh</div>
+                        <ul class="timeline-description">
+                            <li>Researched ML/AI-based approaches to enhance cybersecurity, prototyping anomaly detection and encryption integrity tools using PyTorch and TensorFlow</li>
+                            <li>Explored symbolic regression using CNN and transformer models on real and synthetic datasets, inspired by the AI-Feynman research project</li>
+                            <li>Designed modular cloud automation pipelines with LLM integration to support analytics and data workflows</li>
+                            <li>Prototyped an AI-driven educational assistant to enhance learning outcomes using CNN</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tag">PyTorch</span>
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">LangChain</span>
+                            <span class="tag">FAISS</span>
+                            <span class="tag">S3</span>
+                            <span class="tag">AWS</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">CNN</span>
+                            <span class="tag">Transformers</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-animate>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Jan 2023 - Jun 2024</div>
+                        <h3 class="timeline-title">Specialist OSS Developer (Associate)</h3>
+                        <div class="timeline-subtitle">Banglalink Digital Communication Ltd</div>
+                        <div class="timeline-location">Dhaka, Bangladesh</div>
+                        <ul class="timeline-description">
+                            <li>Functionally led full-stack development of high-availability monitoring systems, achieving zero downtime through parallel processing nodes (Zabbix, Grafana)</li>
+                            <li>Automated maintenance and optimized monitoring stack, reducing CPU usage by 20-40%, storage by 50%, and improving alert processing by 15%</li>
+                            <li>Guided 3+ new hires through hands-on onboarding, fostering team integration</li>
+                            <li>Collaborated with global teams to implement productivity-enhancing tools</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tag">Zabbix</span>
+                            <span class="tag">Grafana</span>
+                            <span class="tag">DevOps</span>
+                            <span class="tag">Automated Maintenance</span>
+                            <span class="tag">Automated Event Handling</span>
+                            <span class="tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-animate>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Oct 2022 - Dec 2022</div>
+                        <h3 class="timeline-title">Big Data Analyst (Associate)</h3>
+                        <div class="timeline-subtitle">Banglalink Digital Communication Ltd</div>
+                        <div class="timeline-location">Dhaka, Bangladesh</div>
+                        <ul class="timeline-description">
+                            <li>Collaborated on scalable CDR data pipelines supporting real-time KPI monitoring and feature engineering for ML analysis</li>
+                            <li>Explored and tested distributed Big Data/ETL tools in collaborative environment (HDFS, Spark, Airflow)</li>
+                            <li>Guided 2+ colleagues in skill development, promoting team sustainability</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tag">Apache Spark</span>
+                            <span class="tag">Apache Airflow</span>
+                            <span class="tag">HDFS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-animate>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Jan 2022 - Sep 2022</div>
+                        <h3 class="timeline-title">Python DevOps Engineer</h3>
+                        <div class="timeline-subtitle">Shurjomukhi Solutions Ltd</div>
+                        <div class="timeline-location">Dhaka, Bangladesh</div>
+                        <ul class="timeline-description">
+                            <li>Built and deployed containerized Django REST platform in Agile sprints aligned with investor goals</li>
+                            <li>Collaborated cross-functionally with ML team to design and deploy image recognition models</li>
+                            <li>Mentored 4+ junior developers through hands-on guidance, facilitating tool adoption</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tag">Django REST</span>
+                            <span class="tag">Docker</span>
+                            <span class="tag">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section Moved Above Experience Section-->
+    
     <!-- Skills Section -->
     <section class="skills" id="skills">
         <div class="container">
