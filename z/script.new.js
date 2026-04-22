@@ -463,80 +463,186 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Visitor Counter with Location Detection
-// NOTE:
-// A true unique visitor counter based on IP cannot be implemented reliably in frontend-only code.
-// This version expects a small backend/serverless endpoint that:
-// 1) identifies the visitor IP server-side,
-// 2) avoids recounting the same IP for 1 hour,
-// 3) returns the global count and location.
-//
-// Expected response JSON:
-// {
-//   "count": 123,
-//   "location": "🇯🇵 Tokyo, JP"
-// }
-//
-// To use it, replace VISITOR_API_URL with your deployed endpoint.
-const VISITOR_API_URL = 'https://Yportfolio-counter.humayan-kabir.workers.dev/visitor';
-
 async function setupVisitorCounter() {
     const visitorCountElement = document.getElementById('visitorCount');
     const visitorLocationElement = document.getElementById('visitorLocation');
-
-    if (!visitorCountElement || !visitorLocationElement) return;
-
-    visitorCountElement.textContent = '...';
-    visitorLocationElement.textContent = 'Detecting location...';
-
+    
+    // Check if this is a unique visit (using session-based tracking)
+    const sessionKey = 'portfolioSessionActive';
+    const countKey = 'portfolioVisitCount';
+    const lastVisitKey = 'portfolioLastVisit';
+    
+    let visitCount = parseInt(localStorage.getItem(countKey)) || 0;
+    const isActiveSession = sessionStorage.getItem(sessionKey);
+    const lastVisit = parseInt(localStorage.getItem(lastVisitKey)) || 0;
+    const now = Date.now();
+    const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
+    
+    // Only increment if:
+    // 1. No active session (new tab/window), OR
+    // 2. More than 30 minutes since last visit
+    if (!isActiveSession && (now - lastVisit > oneHour)) {
+        visitCount++;
+        localStorage.setItem(countKey, visitCount);
+        localStorage.setItem(lastVisitKey, now);
+        sessionStorage.setItem(sessionKey, 'true');
+        console.log('✅ New unique visit counted');
+    } else {
+        console.log('⏭️ Same session - not counting');
+    }
+    
+    // Animate counter
+    let currentCount = 0;
+    const targetCount = visitCount;
+    const duration = 2000;
+    const increment = targetCount / (duration / 16);
+    
+    const counterInterval = setInterval(() => {
+        currentCount += increment;
+        if (currentCount >= targetCount) {
+            currentCount = targetCount;
+            clearInterval(counterInterval);
+        }
+        visitorCountElement.textContent = Math.floor(currentCount).toLocaleString();
+    }, 16);
+    
+    // Fetch visitor location using multiple free APIs with fallbacks
+    // Note: When running locally (localhost/127.0.0.1), APIs return server location, not your real location
+    // This is normal - it will work correctly when deployed to GitHub Pages
+    
     try {
-        const response = await fetch(VISITOR_API_URL, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json'
-            },
-            cache: 'no-store'
-        });
-
-        if (!response.ok) {
-            throw new Error(`Visitor API request failed with status ${response.status}`);
+        console.log('🌍 Detecting location...');
+        
+        // Try ipapi.co first (most accurate, but has rate limits)
+        let response = await fetch('https://ipapi.co/json/');
+        let data = await response.json();
+        
+        console.log('📡 API Response:', data);
+        
+        let locationText = '';
+        let countryCode = '';
+        
+        // Check if we got valid data (not rate limited)
+        if (data && !data.error && data.country_name) {
+            const city = data.city || '';
+            const country = data.country_name || '';
+            countryCode = data.country_code || '';
+            
+            if (city && country) {
+                locationText = `${city}, ${country}`;
+            } else if (country) {
+                locationText = country;
+            }
+            
+            console.log('✅ ipapi.co successful');
+        } else {
+            console.log('⚠️ ipapi.co failed or rate limited, trying fallback...');
+            
+            // Fallback #1: ip-api.com (HTTPS, no rate limits)
+            try {
+                response = await fetch('https://ip-api.com/json/');
+                data = await response.json();
+                
+                console.log('📡 Fallback #1 API Response:', data);
+                
+                if (data && data.status === 'success') {
+                    const city = data.city || '';
+                    const country = data.country || '';
+                    countryCode = data.countryCode || '';
+                    
+                    if (city && country) {
+                        locationText = `${city}, ${country}`;
+                    } else if (country) {
+                        locationText = country;
+                    }
+                    
+                    console.log('✅ ip-api.com successful');
+                } else {
+                    throw new Error('ip-api.com returned no data');
+                }
+            } catch (fallback1Error) {
+                console.log('⚠️ ip-api.com failed, trying fallback #2...');
+                
+                // Fallback #2: ipwho.is (free, HTTPS, no rate limits)
+                response = await fetch('https://ipwho.is/');
+                data = await response.json();
+                
+                console.log('📡 Fallback #2 API Response:', data);
+                
+                if (data && data.success) {
+                    const city = data.city || '';
+                    const country = data.country || '';
+                    countryCode = data.country_code || '';
+                    
+                    if (city && country) {
+                        locationText = `${city}, ${country}`;
+                    } else if (country) {
+                        locationText = country;
+                    }
+                    
+                    console.log('✅ ipwho.is successful');
+                }
+            }
         }
-
-        const data = await response.json();
-        const rawCount = Number(data?.count);
-        const safeCount = Number.isFinite(rawCount) && rawCount >= 0 ? Math.floor(rawCount) : 0;
-
-        animateVisitorCount(visitorCountElement, safeCount);
-
-        const location = typeof data?.location === 'string' ? data.location.trim() : '';
-        visitorLocationElement.textContent = location || 'Global visitor';
-
-        console.log('Visitor counter loaded successfully:', {
-            count: safeCount,
-            location: visitorLocationElement.textContent
-        });
+        
+        // Add flag emoji if we have country code
+        if (countryCode) {
+            const flag = getFlagEmoji(countryCode);
+            locationText = `${flag} ${locationText}`;
+        }
+        
+        if (locationText) {
+            visitorLocationElement.textContent = locationText;
+            console.log('📍 Location detected:', locationText);
+        } else {
+            throw new Error('No location data received from any API');
+        }
+        
     } catch (error) {
-        console.error('Visitor counter failed:', error);
-        visitorCountElement.textContent = '—';
-        visitorLocationElement.textContent = 'Location unavailable';
-    }
-}
-
-function animateVisitorCount(element, targetCount) {
-    const duration = 1200;
-    const startTime = performance.now();
-
-    function frame(now) {
-        const progress = Math.min((now - startTime) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(targetCount * eased);
-        element.textContent = current.toLocaleString();
-
-        if (progress < 1) {
-            requestAnimationFrame(frame);
+        console.error('❌ Location detection failed:', error);
+        
+        // Ultimate fallback - try to guess from browser language
+        try {
+            const userLang = navigator.language || navigator.userLanguage;
+            console.log('🌐 Browser language:', userLang);
+            
+            const langParts = userLang.split('-');
+            const countryCode = langParts[1]; // e.g., 'en-US' -> 'US'
+            
+            if (countryCode && countryCode.length === 2) {
+                const flag = getFlagEmoji(countryCode);
+                const countryNames = {
+                    'US': 'United States',
+                    'GB': 'United Kingdom',
+                    'CA': 'Canada',
+                    'AU': 'Australia',
+                    'BD': 'Bangladesh',
+                    'IN': 'India',
+                    'PK': 'Pakistan',
+                    'JP': 'Japan',
+                    'CN': 'China',
+                    'DE': 'Germany',
+                    'FR': 'France'
+                };
+                const countryName = countryNames[countryCode] || 'Unknown';
+                visitorLocationElement.textContent = `${flag} ${countryName} (estimated)`;
+                console.log('📍 Estimated location from browser:', countryName);
+            } else {
+                visitorLocationElement.textContent = '🌍 Global visitor';
+            }
+        } catch (e) {
+            visitorLocationElement.textContent = '🌍 Global visitor';
+            console.log('📍 Could not detect location, showing global');
         }
     }
-
-    requestAnimationFrame(frame);
+    
+    console.log(`👁️ Total unique visits: ${visitCount}`);
+    
+    // Important note for local development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.log('⚠️ RUNNING LOCALLY: Location detection may show server/VPN location, not your real location.');
+        console.log('✅ This will work correctly when deployed to GitHub Pages.');
+    }
 }
 
 // Convert country code to flag emoji
