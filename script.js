@@ -477,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // }
 //
 // To use it, replace VISITOR_API_URL with your deployed endpoint.
-const VISITOR_API_URL = 'https://Yportfolio-counter.humayan-kabir.workers.dev/visitor';
+const VISITOR_API_URL = 'https://portfolio-counter.humayan-kabir.workers.dev/visitor';
 
 async function setupVisitorCounter() {
     const visitorCountElement = document.getElementById('visitorCount');
