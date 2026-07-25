@@ -1139,8 +1139,8 @@ section {
     border-color: var(--accent-wash);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
-    /* background: var(--accent-wash); */
-    color: var(--accent);
+    outline: 1px solid var(--accent);
+    border-radius: 1px;
 }
 
 .post-card-art {
