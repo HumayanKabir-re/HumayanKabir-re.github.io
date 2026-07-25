@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSLRFGYNE6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-NSLRFGYNE6');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humayan Kabir - Machine Learning Engineer</title>
+    <meta name="description" content="Machine Learning Engineer in Dhaka, Bangladesh. Deep learning, LLMs, and data infrastructure, most recently a multilingual product search engine built and evaluated end to end.">
+    <meta name="author" content="Humayan Kabir">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://humayankabir-re.github.io/">
+    <meta property="og:title" content="Humayan Kabir - Machine Learning Engineer">
+    <meta property="og:description" content="Machine Learning Engineer in Dhaka, Bangladesh. Deep learning, LLMs, and data infrastructure, most recently a multilingual product search engine built and evaluated end to end.">
+    <meta property="og:image" content="https://humayankabir-re.github.io/assets/img/profile-photo.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://humayankabir-re.github.io/">
+    <meta property="twitter:title" content="Humayan Kabir - Machine Learning Engineer">
+    <meta property="twitter:description" content="Machine Learning Engineer in Dhaka, Bangladesh. Deep learning, LLMs, and data infrastructure, most recently a multilingual product search engine built and evaluated end to end.">
+    <meta property="twitter:image" content="https://humayankabir-re.github.io/assets/img/profile-photo.jpg">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23c41e3a'/><text x='32' y='43' font-family='monospace' font-size='30' font-weight='700' fill='%23fff' text-anchor='middle'>HK</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Sora:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <script>
+        // Applied before first paint so the page never flashes the wrong theme.
+        (function () {
+            var stored = null;
+            try { stored = localStorage.getItem('theme'); } catch (e) {}
+            if (!stored && window.matchMedia('(prefers-color-scheme: light)').matches) stored = 'light';
+            document.documentElement.dataset.theme = stored === 'light' ? 'dark' : 'light';
+        })();
+    </script>
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo"><span class="loading-text">HK</span></div>
+            <div class="loading-bar"><div class="loading-progress" id="loadingProgress"></div></div>
+            <p class="loading-status" id="loadingStatus">Loading assets</p>
+        </div>
+    </div>
+
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">HK<span class="cursor-blink">_</span></a>
+            <div class="nav-menu" id="navMenu">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="blog/index.html" class="nav-link">Blog</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" type="button" aria-label="Switch to dark theme">
+                    <svg class="icon-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+                    </svg>
+                    <svg class="icon-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4.2"/>
+                        <path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/>
+                    </svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-background">
+            <canvas id="neural-network" aria-hidden="true"></canvas>
+        </div>
+        <main id="main-content">
+            <div class="container">
+                <div class="hero-text">
+                    <p class="hero-greeting">Hello, I'm</p>
+                    <h1 class="hero-name">Humayan Kabir</h1>
+                    <div class="hero-title-wrapper">
+                        <h2 class="hero-title"><span class="typing-text" id="typingText"></span><span class="cursor">|</span></h2>
+                    </div>
+                    <p class="hero-description">
+                        I build and evaluate machine learning systems end to end. Most recently a multilingual
+                        product search engine, from dataset through learned ranking to a running service.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn btn-primary">
+                            <span>View Projects</span>
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                                <path d="M7 3L14 10L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="assets/Humayan_Kabir_Resume.pdf" class="btn btn-secondary" download>
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 3v11m0 0l-4-4m4 4l4-4M3 17h14" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Download Resume</span>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    </div>
+                    <div class="hero-social">
+                        <a href="https://github.com/HumayanKabir-re" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                            <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/humayan-kabir-linked" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                            <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:humayan.kabir.official@gmail.com" class="social-link" aria-label="Email">
+                            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="scroll-indicator" aria-hidden="true">
+            <div class="mouse"><div class="wheel"></div></div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">// WHO I AM</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text" data-animate>
+                    <p>
+                        I am a Machine Learning Engineer working across <strong>deep learning, LLMs, and the data
+                        infrastructure that supports them</strong>. Most of my time goes to systems that have to
+                        survive contact with real data: retrieval, ranking, pipelines, and the evaluation that
+                        tells you whether any of it actually worked.
+                    </p>
+                    <p>
+                        I hold a <strong>B.Sc. in Computer Science and Engineering</strong> from North South
+                        University, with a machine learning major, and I have <strong>3+ years of professional
+                        experience</strong> across AI, big data, and deployment. My work spans containerised
+                        applications at an agrotech company, big data pipelines and high-availability monitoring
+                        at a telecom operator, and LLM-based tooling at a law firm.
+                    </p>
+                    <p>
+                        Alongside that I run my own research projects, currently a multilingual product search
+                        engine and a study of what neural models can and cannot recover from a cryptographic
+                        round function. I work with teams across Asia, Europe, and North America, and I write up
+                        what I build, including the parts that did not work.
+                    </p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-number">3+</div>
+                            <div class="highlight-label">Years Experience</div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-number">5+</div>
+                            <div class="highlight-label">Systems Deployed</div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-number">5+</div>
+                            <div class="highlight-label">Engineers Mentored</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image" data-animate>
+                    <div class="image-frame">
+                        <img src="assets/img/profile-photo.jpg" alt="Humayan Kabir" class="profile-photo" width="640" height="800">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">// WHAT I'VE BUILT</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            <div class="projects-grid">
+
+                <article class="project-card featured" data-animate>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <circle cx="17" cy="17" r="10"/>
+                                <path d="M25 25l8 8"/>
+                                <path d="M12 17h10M17 12v10" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <span class="status status-live">Live</span>
+                    </div>
+                    <h3 class="project-title">Mercato</h3>
+                    <p class="project-description">
+                        A multilingual retrieval architecture, currently demonstrated across English and Japanese,
+                        over the Amazon ESCI dataset. English queries run three retrieval channels in parallel
+                        (BM25 keyword, bge-m3 dense semantic, CLIP image); Japanese queries run two. Reciprocal
+                        Rank Fusion merges the ranked lists and a per-locale LambdaMART model reranks the fused
+                        pool. Evaluated on the complete benchmark splits with significance testing, and deployed
+                        on CPU across two free-tier clouds.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">BM25</span>
+                        <span class="tag">bge-m3</span>
+                        <span class="tag">CLIP</span>
+                        <span class="tag">FAISS</span>
+                        <span class="tag">LightGBM</span>
+                        <span class="tag">LambdaMART</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Cloud Run</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://mercato-903037425525.asia-northeast1.run.app" target="_blank" rel="noopener" class="project-link primary">Live demo</a>
+                        <a href="https://huggingface.co/spaces/humayan-kabir/mercato" target="_blank" rel="noopener" class="project-link">Hugging Face</a>
+                        <a href="https://github.com/HumayanKabir-re/mercato" target="_blank" rel="noopener" class="project-link">Source</a>
+                        <a href="blog/mercato.html" class="project-link">Blog post</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-animate>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 28V12M16 28V18M24 28V22M32 28V26"/>
+                                <path d="M6 32h28"/>
+                            </svg>
+                        </div>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h3 class="project-title">Neural Cryptanalysis of SHA-256</h3>
+                    <p class="project-description">
+                        A research study of whether learned models can recover structure from SHA-256's round
+                        function. Five independent method families were evaluated across six phases, with
+                        multi-seed runs, bootstrap confidence intervals, and capacity ablations. A Speck32/64
+                        neural distinguisher served as a positive control to confirm the method finds structure
+                        where structure exists. All five families converged on the same limit at round five.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Transformers</span>
+                        <span class="tag">GNN</span>
+                        <span class="tag">MLP</span>
+                        <span class="tag">Cryptanalysis</span>
+                        <span class="tag">Ablation Studies</span>
+                        <span class="tag">Statistical Testing</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="blog/round-wall.html" class="project-link">Blog post</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-animate>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="7" y="9" width="18" height="14" rx="2"/>
+                                <path d="M7 19l5-4 5 4 3-2 5 4"/>
+                                <path d="M20 29h13M20 33h9"/>
+                            </svg>
+                        </div>
+                        <span class="status status-progress">In development</span>
+                    </div>
+                    <h3 class="project-title">Kavel</h3>
+                    <p class="project-description">
+                        A multimodal listing generator: from a product photo to a complete marketplace listing,
+                        generating title, description, and structured attributes, with retrieval grounding the
+                        generated copy in comparable existing listings.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">LLM</span>
+                        <span class="tag">Multimodal</span>
+                        <span class="tag">RAG</span>
+                        <span class="tag">Vision</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="blog/kavel.html" class="project-link">Blog post</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-animate>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 6v28M6 20h28"/>
+                                <circle cx="20" cy="20" r="14"/>
+                                <path d="M20 6c4 4 4 24 0 28M20 6c-4 4-4 24 0 28"/>
+                            </svg>
+                        </div>
+                        <span class="status status-progress">In development</span>
+                    </div>
+                    <h3 class="project-title">ESCI-JP</h3>
+                    <p class="project-description">
+                        An open image-embedding extension for the Japanese locale of the ESCI dataset. No public
+                        dataset provides Japanese image coverage equivalent to SQID's English coverage, which is
+                        why Japanese search in Mercato runs text only and its reranker has two fewer features.
+                        Follows SQID's methodology and license, distributing embeddings and references rather
+                        than images.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">CLIP</span>
+                        <span class="tag">Embeddings</span>
+                        <span class="tag">Open Data</span>
+                        <span class="tag">Hugging Face</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="blog/esci-jp.html" class="project-link">Blog post</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-animate>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+                                <path d="M10 15 L20 10 L30 15 L20 20 Z"/>
+                                <path d="M10 20 L20 25 L30 20"/>
+                                <path d="M10 25 L20 30 L30 25"/>
+                            </svg>
+                        </div>
+                        <span class="status status-prototype">Prototype</span>
+                    </div>
+                    <h3 class="project-title">RAG Based Educational Assistant</h3>
+                    <p class="project-description">
+                        A retrieval-augmented assistant for academic feedback. Rather than reporting a grade, it
+                        surfaces the specific weak points behind it, so a student sees what to work on next.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">LLMs</span>
+                        <span class="tag">RAG</span>
+                        <span class="tag">LangChain</span>
+                        <span class="tag">FAISS</span>
+                        <span class="tag">REST API</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </article>
+
+                <article class="project-card" data-animate>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <circle cx="20" cy="20" r="14"/>
+                                <path d="M20 11v9l6 4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="project-title">LLM Powered Cloud Automation Pipeline</h3>
+                    <p class="project-description">
+                        LLM-driven cloud pipelines that automate analytics workflows and routine data operations,
+                        built to adapt across workloads rather than to one fixed job shape.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">LLMs</span>
+                        <span class="tag">LangChain</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">S3</span>
+                        <span class="tag">REST API</span>
+                        <span class="tag">Data Pipelines</span>
+                    </div>
+                </article>
+
+                <article class="project-card" data-animate>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 30c6-2 8-18 12-18s6 16 12 14"/>
+                                <circle cx="8" cy="30" r="2"/>
+                                <circle cx="32" cy="26" r="2"/>
+                            </svg>
+                        </div>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h3 class="project-title">AI Feynman Inspired Symbolic Regression</h3>
+                    <p class="project-description">
+                        AI Feynman is published research from MIT and Cornell University, among others, which uses
+                        machine learning to recover physical laws from data. This project extends that line of work
+                        with a transformer-based model trained on real and synthetic data.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Symbolic Regression</span>
+                        <span class="tag">Transformers</span>
+                        <span class="tag">CNN</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Synthetic Data</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="blog/symbolic-regression.html" class="project-link">Blog post</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-animate>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 30V18a2.5 2.5 0 015 0v-2a2.5 2.5 0 015 0v2a2.5 2.5 0 015 0v8a6 6 0 01-6 6h-4a8 8 0 01-8-8v-6a2.5 2.5 0 015 0"/>
+                            </svg>
+                        </div>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h3 class="project-title">Real-Time Sign Language Detection</h3>
+                    <p class="project-description">
+                        A computer vision project comparing CNN, RNN, and ResNet architectures for sign
+                        recognition, built around a Bangla sign language dataset assembled for the purpose, with
+                        live sign-to-text translation and user feedback on which sign system worked best.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">CNN</span>
+                        <span class="tag">RNN</span>
+                        <span class="tag">ResNet</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Real-Time Inference</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="blog/sign-language.html" class="project-link">Blog post</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-animate>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="6" y="8" width="28" height="18" rx="2"/>
+                                <path d="M10 21l5-6 4 4 4-7 5 9M14 32h12"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="project-title">High-Availability Real-Time Monitoring System</h3>
+                    <p class="project-description">
+                        A telecom monitoring platform built on parallel processing nodes for continuous
+                        availability, with automated maintenance that cut CPU usage by 20 to 40 percent and
+                        storage by roughly half.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Zabbix</span>
+                        <span class="tag">Grafana</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Unix</span>
+                        <span class="tag">Real-Time Monitoring</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">// MY JOURNEY</span>
+                <h2 class="section-title">Professional Experience</h2>
+            </div>
+            <div class="timeline">
+
+                <div class="timeline-item" data-animate>
+                    <div class="timeline-date">Oct 2025 - Present</div>
+                    <h3 class="timeline-role">Associate AI Solutions Engineer</h3>
+                    <p class="timeline-company">Reliance Legal Services</p>
+                    <p class="timeline-location">Dhaka, Bangladesh</p>
+                    <ul class="timeline-list">
+                        <li>Built an LLM-powered document generation system, reducing per-case formatting time from 30 minutes to under 1 minute.</li>
+                        <li>Designed and deployed an agentic RAG pipeline for semantic search across historical briefs, contracts, and memos.</li>
+                        <li>Optimised internal processes, improving the firm's overall throughput on document-heavy work.</li>
+                    </ul>
+                    <div class="tag-row">
+                        <span class="tag">RAG</span>
+                        <span class="tag">LLMs</span>
+                        <span class="tag">Vector Database</span>
+                        <span class="tag">Data Engineering</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-animate>
+                    <div class="timeline-date">Jan 2023 - Jun 2024</div>
+                    <h3 class="timeline-role">Specialist OSS Developer (Associate)</h3>
+                    <p class="timeline-company">Banglalink Digital Communication Ltd</p>
+                    <p class="timeline-location">Dhaka, Bangladesh</p>
+                    <ul class="timeline-list">
+                        <li>Led deployment and optimisation of high-availability monitoring systems built on parallel processing nodes.</li>
+                        <li>Automated maintenance across the monitoring stack, reducing CPU usage by 20 to 40 percent, storage by about half, and alert-processing overhead by roughly 15 percent.</li>
+                        <li>Guided 3 new hires through hands-on onboarding.</li>
+                    </ul>
+                    <div class="tag-row">
+                        <span class="tag">Zabbix</span>
+                        <span class="tag">Grafana</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">DevOps</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-animate>
+                    <div class="timeline-date">Oct 2022 - Dec 2022</div>
+                    <h3 class="timeline-role">Big Data Analyst (Contractual)</h3>
+                    <p class="timeline-company">Banglalink Digital Communication Ltd</p>
+                    <p class="timeline-location">Dhaka, Bangladesh</p>
+                    <ul class="timeline-list">
+                        <li>Designed and deployed data pipelines and orchestration engines supplying stakeholder KPIs.</li>
+                        <li>Evaluated distributed and parallel big data and ETL tooling across HDFS, Spark, and Airflow.</li>
+                        <li>Guided 2 colleagues in skill development on the new stack.</li>
+                    </ul>
+                    <div class="tag-row">
+                        <span class="tag">Apache Spark</span>
+                        <span class="tag">Apache Airflow</span>
+                        <span class="tag">HDFS</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-animate>
+                    <div class="timeline-date">Jan 2022 - Sep 2022</div>
+                    <h3 class="timeline-role">Python DevOps Engineer</h3>
+                    <p class="timeline-company">Shurjomukhi Solutions Ltd</p>
+                    <p class="timeline-location">Dhaka, Bangladesh</p>
+                    <ul class="timeline-list">
+                        <li>Built and deployed containerised Django REST applications with MySQL and Docker in Agile sprints.</li>
+                        <li>Worked with the machine learning team to research and deploy models for in-house applications.</li>
+                        <li>Mentored 2 junior developers and business staff on in-house tool adoption.</li>
+                    </ul>
+                    <div class="tag-row">
+                        <span class="tag">Django REST</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">MySQL</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">// TECHNICAL EXPERTISE</span>
+                <h2 class="section-title">Skills &amp; Technologies</h2>
+            </div>
+            <div class="skills-grid">
+
+                <div class="skill-group" data-animate>
+                    <h3>Machine Learning &amp; AI</h3>
+                    <div class="tag-row">
+                        <span class="tag">Python</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Transformers</span>
+                        <span class="tag">CNN</span>
+                        <span class="tag">GAN</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">Symbolic Regression</span>
+                    </div>
+                </div>
+
+                <div class="skill-group" data-animate>
+                    <h3>Search &amp; Retrieval</h3>
+                    <div class="tag-row">
+                        <span class="tag">BM25</span>
+                        <span class="tag">FAISS</span>
+                        <span class="tag">HNSW</span>
+                        <span class="tag">bge-m3</span>
+                        <span class="tag">CLIP</span>
+                        <span class="tag">Rank Fusion</span>
+                        <span class="tag">LambdaMART</span>
+                        <span class="tag">LightGBM</span>
+                    </div>
+                </div>
+
+                <div class="skill-group" data-animate>
+                    <h3>LLM &amp; GenAI</h3>
+                    <div class="tag-row">
+                        <span class="tag">RAG</span>
+                        <span class="tag">Agentic RAG</span>
+                        <span class="tag">LangChain</span>
+                        <span class="tag">Vector Databases</span>
+                        <span class="tag">Prompt Engineering</span>
+                    </div>
+                </div>
+
+                <div class="skill-group" data-animate>
+                    <h3>Big Data &amp; Pipelines</h3>
+                    <div class="tag-row">
+                        <span class="tag">Apache Spark</span>
+                        <span class="tag">Apache Airflow</span>
+                        <span class="tag">HDFS</span>
+                        <span class="tag">ETL Design</span>
+                        <span class="tag">Distributed Processing</span>
+                    </div>
+                </div>
+
+                <div class="skill-group" data-animate>
+                    <h3>Deployment &amp; DevOps</h3>
+                    <div class="tag-row">
+                        <span class="tag">Docker</span>
+                        <span class="tag">Google Cloud Run</span>
+                        <span class="tag">Hugging Face Spaces</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Unix</span>
+                        <span class="tag">Shell Scripting</span>
+                    </div>
+                </div>
+
+                <div class="skill-group" data-animate>
+                    <h3>Backend &amp; Data Stores</h3>
+                    <div class="tag-row">
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Django REST</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">Angular</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">// LET'S CONNECT</span>
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
+            <div class="contact-grid">
+                <div data-animate>
+                    <p class="contact-intro">
+                        I am interested in roles and collaborations that put machine learning in front of real
+                        users. If something here is relevant to what you are building, get in touch.
+                    </p>
+                    <div class="contact-list">
+                        <a href="mailto:humayan.kabir.official@gmail.com" class="contact-item" data-copy="humayan.kabir.official@gmail.com">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <span class="copy-label">humayan.kabir.official@gmail.com</span>
+                        </a>
+                        <a href="tel:+8801689961673" class="contact-item" data-copy="+8801689961673">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/>
+                            </svg>
+                            <span class="copy-label">+880-1689961673</span>
+                        </a>
+                        <a href="https://linkedin.com/in/humayan-kabir-linked" target="_blank" rel="noopener" class="contact-item">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                            <span>linkedin.com/in/humayan-kabir-linked</span>
+                        </a>
+                        <a href="https://github.com/HumayanKabir-re" target="_blank" rel="noopener" class="contact-item">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            <span>github.com/HumayanKabir-re</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-card" data-animate>
+                    <h3>Open to Opportunities</h3>
+                    <p>
+                        Looking for machine learning roles that connect research and production, in global teams.
+                        Based in Dhaka, open to relocation.
+                    </p>
+                    <a href="mailto:humayan.kabir.official@gmail.com" class="btn btn-primary">Send an Email</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">&copy; <span data-year>2026</span> Humayan Kabir</p>
+                <div class="footer-links">
+                    <a href="https://github.com/HumayanKabir-re" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://linkedin.com/in/humayan-kabir-linked" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="mailto:humayan.kabir.official@gmail.com">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/canvas.js"></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Humayan Kabir",
+        "jobTitle": "Machine Learning Engineer",
+        "description": "Machine Learning Engineer working across deep learning, LLMs, and data infrastructure.",
+        "url": "https://humayankabir-re.github.io/",
+        "image": "https://humayankabir-re.github.io/assets/img/profile-photo.jpg",
+        "email": "humayan.kabir.official@gmail.com",
+        "telephone": "+880-1689961673",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dhaka",
+            "addressCountry": "Bangladesh"
+        },
+        "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "North South University"
+        },
+        "knowsAbout": ["Machine Learning", "Information Retrieval", "Learning to Rank", "Deep Learning", "LLM", "PyTorch", "Python", "Data Pipelines"],
+        "sameAs": [
+            "https://linkedin.com/in/humayan-kabir-linked",
+            "https://github.com/HumayanKabir-re"
+        ]
+    }
+    </script>
+</body>
+</html>

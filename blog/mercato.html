@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NSLRFGYNE6"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NSLRFGYNE6');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercato: a multilingual product search engine, dataset to deployment - Humayan Kabir</title>
+    <meta name="description" content="Building and evaluating a multilingual product search engine over the Amazon ESCI dataset: three retrieval channels, rank fusion, a learned reranker, and deployment on CPU across two free tiers.">
+    <meta name="author" content="Humayan Kabir">
+
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://humayankabir-re.github.io/blog/mercato.html">
+    <meta property="og:title" content="Mercato: a multilingual product search engine, dataset to deployment">
+    <meta property="og:description" content="Three retrieval channels, rank fusion, a learned reranker, and deployment on CPU across two free tiers.">
+    <meta property="og:image" content="https://humayankabir-re.github.io/assets/img/mercato-us.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://humayankabir-re.github.io/blog/mercato.html">
+    <meta property="twitter:title" content="Mercato: a multilingual product search engine, dataset to deployment">
+    <meta property="twitter:description" content="Three retrieval channels, rank fusion, a learned reranker, and deployment on CPU across two free tiers.">
+    <meta property="twitter:image" content="https://humayankabir-re.github.io/assets/img/mercato-us.jpg">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23c41e3a'/><text x='32' y='43' font-family='monospace' font-size='30' font-weight='700' fill='%23fff' text-anchor='middle'>HK</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Sora:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <script>
+        (function () {
+            var stored = null;
+            try { stored = localStorage.getItem('theme'); } catch (e) {}
+            if (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches) stored = 'dark';
+            document.documentElement.dataset.theme = stored === 'dark' ? 'dark' : 'light';
+        })();
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html#hero" class="nav-logo">HK<span class="cursor-blink">_</span></a>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html#about" class="nav-link">About</a>
+                <a href="../index.html#projects" class="nav-link">Projects</a>
+                <a href="../index.html#experience" class="nav-link">Experience</a>
+                <a href="../index.html#skills" class="nav-link">Skills</a>
+                <a href="index.html" class="nav-link">Blog</a>
+                <a href="../index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" type="button" aria-label="Switch to dark theme">
+                    <svg class="icon-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+                    </svg>
+                    <svg class="icon-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4.2"/>
+                        <path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/>
+                    </svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <article class="post" id="main-content">
+        <div class="post-wrap">
+            <a href="index.html" class="back-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+                All posts
+            </a>
+
+            <h1 class="post-title">Mercato</h1>
+            <p class="post-subtitle">A multilingual product search engine, dataset to deployment</p>
+            <div class="post-meta">
+                <span class="status status-live">Live</span>
+                <span>July 2026</span>
+                <span>10 min read</span>
+                <span class="tag">Information Retrieval</span>
+            </div>
+
+            <figure>
+                <img src="../assets/img/mercato-us.jpg" alt="The Mercato search interface returning ranked results for the English query wireless headphones" width="1400" height="993" loading="eager">
+                <figcaption>Figure 1. The deployed service answering an English query. The header reports the size of the candidate pool the reranker scored, and each result carries its learned relevance score.</figcaption>
+            </figure>
+
+            <nav class="post-toc" aria-label="Contents">
+                <h2>Contents</h2>
+                <ol>
+                    <li><a href="#problem">Searching a marketplace in more than one language</a></li>
+                    <li><a href="#dataset">The dataset, and the honest limits of it</a></li>
+                    <li><a href="#scope">Evaluation scope, and a deliberate asymmetry</a></li>
+                    <li><a href="#architecture">Architecture</a></li>
+                    <li><a href="#retrievers">What each retriever contributes</a></li>
+                    <li><a href="#reranker">The learned reranker</a></li>
+                    <li><a href="#significance">Significance testing</a></li>
+                    <li><a href="#longtail">What did not work</a></li>
+                    <li><a href="#deployment">Deployment</a></li>
+                    <li><a href="#next">What comes next</a></li>
+                </ol>
+            </nav>
+
+            <div class="post-body">
+
+                <h2 id="problem">Searching a marketplace in more than one language</h2>
+
+                <p>
+                    A marketplace that operates in two countries has a choice to make about search. The
+                    straightforward option is to run one stack per language: an English index with an English
+                    analyser and an English model, and a separate Japanese one beside it. It works, and it doubles
+                    the number of things you maintain. Every improvement has to be made twice, every regression
+                    can appear in one language and not the other, and the two systems drift apart over time.
+                </p>
+                <p>
+                    The alternative is a single embedding model that already covers both languages, with only the
+                    locale-specific parts kept separate. That is what Mercato does. The dense retriever is
+                    <code>bge-m3</code>, which is trained across more than a hundred languages, so English and
+                    Japanese text land in the same vector space without any per-language modelling work. What
+                    stays separate is the part that genuinely differs: the keyword tokenizer, the judgments used
+                    for evaluation, and the ranking model trained on them.
+                </p>
+                <p>
+                    That is worth being precise about, because it is easy to overstate. Mercato is a multilingual
+                    retrieval architecture that is <em>currently demonstrated</em> across English and Japanese.
+                    Two locales are live. Adding a third does not require a new model — it requires that locale's
+                    tokenizer and a set of judgments to train and evaluate against.
+                </p>
+
+                <h2 id="dataset">The dataset, and the honest limits of it</h2>
+
+                <p>
+                    The evaluation runs on the Amazon <strong>Shopping Queries Dataset</strong> (ESCI), which
+                    pairs real search queries with real products and a human relevance label per pair: Exact,
+                    Substitute, Complement, or Irrelevant. Two properties make it the right choice here. It
+                    covers US and Japanese locales, which is the whole point of the exercise. And its labels are
+                    graded rather than binary, which means NDCG measures something real — getting an Exact match
+                    above a Substitute is rewarded, rather than both counting equally as a hit.
+                </p>
+                <p>
+                    Product images come from <strong>SQID</strong>, a community extension that publishes
+                    precomputed CLIP vectors for ESCI products rather than the images themselves, which keeps it
+                    distributable. Both datasets have limits worth stating plainly:
+                </p>
+                <ul>
+                    <li><strong>SQID covers US products only.</strong> There is no equivalent Japanese image
+                        coverage in any public dataset. This is the single biggest asymmetry in the system and it
+                        propagates everywhere downstream.</li>
+                    <li><strong>Roughly 5% of SQID's image vectors are malformed</strong> — wrong dimensionality
+                        rather than missing. They have to be detected and dropped rather than trusted, because a
+                        wrongly shaped vector fails late and confusingly rather than at load time.</li>
+                    <li><strong>Product text is not uniformly short.</strong> Title, brand, and description
+                        together are long enough that truncation length is a real decision, not a formality.</li>
+                </ul>
+                <p>
+                    None of this is a reason to pick a different dataset. There is no public alternative with
+                    graded judgments across both an English and a Japanese locale. It is a reason to say what the
+                    numbers do and do not cover.
+                </p>
+
+                <h2 id="scope">Evaluation scope, and a deliberate asymmetry</h2>
+
+                <p>
+                    Everything below runs on complete benchmark splits. Nothing is sampled down to make it
+                    finish faster.
+                </p>
+
+                <div class="table-scroll">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Locale</th><th>Queries</th><th>Products</th><th>Judgments</th><th>Retrieval channels</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>English (US)</td><td>8,956</td><td>164,900</td><td>181,701</td><td>Keyword, dense, image</td></tr>
+                            <tr><td>Japanese</td><td>10,407</td><td>233,850</td><td>297,883</td><td>Keyword, dense</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    The judgments are sparse, and that shapes how everything is measured. Each English query is
+                    judged against roughly 20 products on average, not against all 164,900; the Japanese figure is
+                    about 29. So there are two distinct bases for measuring, and mixing them produces nonsense:
+                </p>
+                <ul>
+                    <li><strong>Full-corpus retrieval</strong> asks a retriever to find the right products among
+                        every product in the index. Scores here are low in absolute terms, because the task is
+                        genuinely hard.</li>
+                    <li><strong>Judged-candidate reranking</strong> asks a model to order a pool where the
+                        relevant items are already present. Scores here are high, because finding is no longer
+                        part of the job.</li>
+                </ul>
+                <p>
+                    An NDCG@10 of 0.48 on the first basis and 0.86 on the second are not in competition. They
+                    answer different questions, and every number below is labelled with which one it belongs to.
+                </p>
+
+                <h2 id="architecture">Architecture</h2>
+
+                <p>
+                    A query fans out to the retrievers in parallel, each returning its own ranked list. Reciprocal
+                    Rank Fusion merges those lists into one candidate pool, and a LambdaMART model trained for
+                    that locale reorders the pool. The top 20 are returned.
+                </p>
+
+                <figure>
+                    <svg viewBox="0 0 760 420" role="img" aria-label="Diagram of the retrieval pipeline from query through three parallel retrievers, rank fusion, and a learned reranker to the returned results">
+                        <defs>
+                            <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3.2" orient="auto">
+                                <path d="M0 0 L8 3.2 L0 6.4 z" fill="currentColor" opacity="0.55"/>
+                            </marker>
+                        </defs>
+                        <g fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55" marker-end="url(#ar)">
+                            <path d="M118 210 H166"/>
+                            <path d="M250 210 L292 96"/>
+                            <path d="M250 210 H292"/>
+                            <path d="M250 210 L292 324"/>
+                            <path d="M470 96 L512 198"/>
+                            <path d="M470 210 H512"/>
+                            <path d="M470 324 L512 222"/>
+                            <path d="M596 210 H638"/>
+                        </g>
+
+                        <g font-family="Sora, sans-serif" text-anchor="middle">
+                            <rect x="20" y="188" width="98" height="44" rx="7" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.4"/>
+                            <text x="69" y="215" font-size="14" font-weight="600" fill="var(--text-primary)">Query</text>
+
+                            <rect x="166" y="188" width="84" height="44" rx="7" fill="var(--surface-raised)" stroke="var(--border-strong)" stroke-width="1.2"/>
+                            <text x="208" y="209" font-size="12.5" fill="var(--text-primary)">Normalize</text>
+                            <text x="208" y="223" font-size="11.5" fill="var(--text-muted)">NFKC, lower</text>
+
+                            <rect x="292" y="72" width="178" height="48" rx="7" fill="var(--surface-card)" stroke="var(--border-strong)" stroke-width="1.2"/>
+                            <text x="381" y="93" font-size="13.5" font-weight="600" fill="var(--text-primary)">BM25 keyword</text>
+                            <text x="381" y="108" font-size="11.5" fill="var(--text-muted)">sparse lexical match</text>
+
+                            <rect x="292" y="186" width="178" height="48" rx="7" fill="var(--surface-card)" stroke="var(--border-strong)" stroke-width="1.2"/>
+                            <text x="381" y="207" font-size="13.5" font-weight="600" fill="var(--text-primary)">bge-m3 dense</text>
+                            <text x="381" y="222" font-size="11.5" fill="var(--text-muted)">FAISS HNSW, 1024-dim</text>
+
+                            <rect x="292" y="300" width="178" height="48" rx="7" fill="var(--surface-card)" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="4 3"/>
+                            <text x="381" y="321" font-size="13.5" font-weight="600" fill="var(--text-primary)">CLIP image</text>
+                            <text x="381" y="336" font-size="11.5" fill="var(--text-muted)">English only</text>
+
+                            <rect x="512" y="186" width="84" height="48" rx="7" fill="var(--surface-raised)" stroke="var(--border-strong)" stroke-width="1.2"/>
+                            <text x="554" y="206" font-size="13" font-weight="600" fill="var(--text-primary)">RRF</text>
+                            <text x="554" y="221" font-size="11.5" fill="var(--text-muted)">fusion</text>
+
+                            <rect x="638" y="180" width="106" height="60" rx="7" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.4"/>
+                            <text x="691" y="203" font-size="13" font-weight="700" fill="var(--text-primary)">LambdaMART</text>
+                            <text x="691" y="218" font-size="11.5" fill="var(--text-muted)">per locale</text>
+                            <text x="691" y="231" font-size="11.5" fill="var(--text-muted)">top 20 out</text>
+                        </g>
+                    </svg>
+                    <figcaption>Figure 2. The retrieval pipeline. The image channel is drawn dashed because it runs for English only — SQID provides image vectors for US products and there is no Japanese equivalent.</figcaption>
+                </figure>
+
+                <p>
+                    Rank fusion rather than score fusion is a deliberate choice. BM25 scores and cosine
+                    similarities are not on a shared scale and there is no principled conversion between them.
+                    RRF sidesteps that entirely by discarding the scores and combining positions, which means a
+                    retriever cannot dominate the merge just because its numbers happen to be larger.
+                </p>
+
+                <h2 id="retrievers">What each retriever contributes</h2>
+
+                <p>
+                    Measured on the full-corpus basis for English, where the retriever has to find relevant
+                    products among all 164,900:
+                </p>
+
+                <figure>
+                    <svg viewBox="0 0 720 300" role="img" aria-label="Bar chart comparing NDCG at 10 for five English retrieval configurations, ranging from 0.3898 for dense alone to 0.4821 for three-way fusion">
+                        <g font-family="Sora, sans-serif">
+                            <g stroke="currentColor" opacity="0.16" stroke-width="1">
+                                <path d="M172 30 V262"/><path d="M172 262 H700"/>
+                            </g>
+                            <g font-family="JetBrains Mono, monospace" font-size="11" fill="var(--text-muted)" text-anchor="middle">
+                                <text x="172" y="278">0.00</text>
+                                <text x="304" y="278">0.15</text>
+                                <text x="436" y="278">0.30</text>
+                                <text x="568" y="278">0.45</text>
+                                <text x="700" y="278">0.60</text>
+                            </g>
+
+                            <g font-size="13" fill="var(--text-primary)" text-anchor="end">
+                                <text x="160" y="55">Dense only</text>
+                                <text x="160" y="100">BM25 only</text>
+                                <text x="160" y="145">RRF hybrid</text>
+                                <text x="160" y="190">Weighted hybrid</text>
+                                <text x="160" y="235">Three-way RRF</text>
+                            </g>
+
+                            <g opacity="0.85">
+                                <rect x="172" y="40" width="343" height="22" rx="3" fill="var(--text-muted)"/>
+                                <rect x="172" y="85" width="354" height="22" rx="3" fill="var(--text-muted)"/>
+                                <rect x="172" y="130" width="400" height="22" rx="3" fill="var(--text-secondary)"/>
+                                <rect x="172" y="175" width="402" height="22" rx="3" fill="var(--text-secondary)"/>
+                                <rect x="172" y="220" width="424" height="22" rx="3" fill="var(--accent)"/>
+                            </g>
+
+                            <g font-family="JetBrains Mono, monospace" font-size="12" font-weight="500" fill="var(--text-primary)">
+                                <text x="525" y="56">0.3898</text>
+                                <text x="536" y="101">0.4019</text>
+                                <text x="582" y="146">0.4545</text>
+                                <text x="584" y="191">0.4563</text>
+                                <text x="606" y="236">0.4821</text>
+                            </g>
+                        </g>
+                    </svg>
+                    <figcaption>Figure 3. English retrieval, NDCG@10 on the full corpus. Neither retriever wins alone; every fusion beats both, and adding the image channel adds more than the choice between the two text-fusion methods.</figcaption>
+                </figure>
+
+                <p>
+                    Two things stand out. First, BM25 and dense retrieval score almost the same on their own
+                    (0.4019 against 0.3898), but fusing them reaches 0.4545 — they are finding different products,
+                    not the same products in a different order. Exact keyword matching handles brand names, model
+                    numbers, and part codes, which embeddings routinely blur together; embeddings handle
+                    paraphrase and intent, which keyword matching misses completely.
+                </p>
+                <p>
+                    Second, the image channel earns its place despite being the weakest retriever in isolation.
+                    Going from two-way to three-way fusion moves NDCG@10 from 0.4545 to 0.4821, a larger gain than
+                    anything else in the table. A shopper searching for a physical object often means something
+                    visual that the title does not spell out, and image similarity catches products whose text is
+                    unhelpful — badly written listings, sparse descriptions, keyword-stuffed titles.
+                </p>
+                <p>
+                    Japanese dense retrieval on the same basis reaches NDCG@10 0.3918, MRR 0.6142, and Recall@100
+                    0.4650 — close to the English dense figure, which is what you would hope for from a single
+                    multilingual model doing the same job in both languages.
+                </p>
+
+                <h2 id="reranker">The learned reranker</h2>
+
+                <p>
+                    Fusion produces a good candidate pool but it does not know anything about the query. A
+                    LambdaMART model, trained with LightGBM and tuned with Optuna, reorders that pool using ten
+                    features for English and eight for Japanese. The two missing Japanese features are the image
+                    ones, for the reason established above.
+                </p>
+                <p>
+                    Two decisions matter more than the feature list:
+                </p>
+                <p>
+                    <strong>Grouping by query.</strong> The model is trained with a group parameter that tells it
+                    which rows belong to the same query. As a result it learns relative ordering within a query
+                    rather than an absolute relevance score. That is what ranking actually needs. An absolute
+                    scorer would waste capacity learning that some queries are generally easier than others,
+                    which tells you nothing about which product should sit at position one.
+                </p>
+                <p>
+                    <strong>Splitting by query, not by row.</strong> Cross-validation folds are drawn at query
+                    level. Splitting rows at random would put some products from a query in training and the rest
+                    in validation, and the model would score its own training queries at evaluation time. The
+                    numbers would look excellent and mean nothing.
+                </p>
+
+                <div class="table-scroll">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Locale</th><th>Fusion NDCG@10</th><th>After reranking</th><th>Gain</th><th>Features</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>English</td><td>0.8262</td><td>0.8581</td><td>+0.0319</td><td>10</td></tr>
+                            <tr><td>Japanese</td><td>0.8194</td><td>0.8315</td><td>+0.0121</td><td>8</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    These are judged-candidate, out-of-fold figures. The pool already contains the relevant
+                    items; the reranker's job is only to order them.
+                </p>
+
+                <h2 id="significance">Significance testing</h2>
+
+                <p>
+                    A gain of +0.0319 is small enough that it is fair to ask whether it is real or noise. A
+                    Wilcoxon signed-rank test across all 8,956 English queries returns p = 1.5 × 10⁻²¹⁰.
+                </p>
+                <p>
+                    That number is not a claim that the improvement is large. It is a claim that it is
+                    <em>consistent</em>: the reranker helps on nearly every query rather than helping enormously
+                    on a few and hurting elsewhere. For a production ranker that consistency is the property you
+                    want, because an average gain built from wild per-query swings is a worse user experience
+                    than a small reliable one, even at identical mean NDCG.
+                </p>
+
+                <h2 id="longtail">What did not work</h2>
+
+                <p>
+                    Performance is not evenly distributed across queries. Bucketing English queries by how many
+                    judgments they carry shows a clear gradient: weighted fusion reaches NDCG@10 0.5148 on richly
+                    judged queries and falls to 0.4131 on the sparsest bucket.
+                </p>
+
+                <figure>
+                    <svg viewBox="0 0 720 250" role="img" aria-label="Bar chart comparing NDCG at 10 of 0.5148 on richly judged queries against 0.4131 on the sparsest bucket, a drop of 0.1017">
+                        <g font-family="Sora, sans-serif">
+                            <g stroke="currentColor" opacity="0.16" stroke-width="1">
+                                <path d="M200 40 V196"/><path d="M200 196 H680"/>
+                            </g>
+                            <g font-family="JetBrains Mono, monospace" font-size="11" fill="var(--text-muted)" text-anchor="middle">
+                                <text x="200" y="212">0.00</text>
+                                <text x="320" y="212">0.15</text>
+                                <text x="440" y="212">0.30</text>
+                                <text x="560" y="212">0.45</text>
+                                <text x="680" y="212">0.60</text>
+                            </g>
+
+                            <g font-size="13.5" fill="var(--text-primary)" text-anchor="end">
+                                <text x="188" y="80">Richly judged</text>
+                                <text x="188" y="150">Sparsest bucket</text>
+                            </g>
+
+                            <rect x="200" y="58" width="412" height="30" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+                            <rect x="200" y="128" width="330" height="30" rx="3" fill="var(--accent)" opacity="0.9"/>
+
+                            <g font-family="JetBrains Mono, monospace" font-size="12.5" font-weight="500" fill="var(--text-primary)">
+                                <text x="622" y="78">0.5148</text>
+                                <text x="540" y="148">0.4131</text>
+                            </g>
+
+                            <g stroke="var(--text-muted)" stroke-width="1" opacity="0.5" stroke-dasharray="3 3">
+                                <path d="M530 100 V128"/><path d="M612 88 V100"/>
+                            </g>
+                            <path d="M530 100 H612" stroke="var(--text-muted)" stroke-width="1" opacity="0.5"/>
+                            <text x="571" y="115" font-family="JetBrains Mono, monospace" font-size="11.5" fill="var(--text-muted)" text-anchor="middle">-0.1017</text>
+
+                            <text x="440" y="238" font-size="12" fill="var(--text-muted)" text-anchor="middle">Weighted fusion, NDCG@10 by judgment density</text>
+                        </g>
+                    </svg>
+                    <figcaption>Figure 4. Weighted fusion on English queries, split by how many judgments each query carries. The system loses about a fifth of its ranking quality on the thinnest-judged queries.</figcaption>
+                </figure>
+
+                <p>
+                    The obvious lever is query expansion — add related terms to a sparse query so it matches more
+                    documents. I implemented pseudo-relevance feedback, then an RM3-inspired interpolation, and
+                    measured both against the baseline.
+                </p>
+                <p>
+                    <strong>Both made things worse where it counted.</strong> Recall went up, which is what
+                    expansion is supposed to do, and precision at the top of the ranking went down by more.
+                    Adding terms to a query drifts it away from what the user asked for, and on the sparsest
+                    queries — where there is least signal to anchor the expansion — the drift is worst. After
+                    reranking, the RM3-inspired variant and classic PRF landed close to identical, and the
+                    overall effect was a small win that was neutral on long-tail top-rank performance.
+                </p>
+                <p>
+                    That is a negative result and it stays in the write-up. The diagnosis is that the long tail
+                    here is a <em>recall</em> problem caused by thin judgments, not a ranking problem that
+                    reordering can fix. Query expansion is the wrong lever, applied correctly. Knowing which
+                    lever is wrong is worth more than a table where everything improved.
+                </p>
+
+                <h2 id="deployment">Deployment</h2>
+
+                <p>
+                    The service runs on CPU only, on free tiers, in two places. There is no GPU anywhere in the
+                    serving path.
+                </p>
+
+                <figure>
+                    <svg viewBox="0 0 720 330" role="img" aria-label="Deployment topology showing one container image published to Google Cloud Run in Tokyo and to Hugging Face Spaces, with artifacts on the Hugging Face Hub">
+                        <g font-family="Sora, sans-serif" text-anchor="middle">
+                            <rect x="24" y="128" width="150" height="72" rx="8" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.4"/>
+                            <text x="99" y="156" font-size="13.5" font-weight="700" fill="var(--text-primary)">Container image</text>
+                            <text x="99" y="172" font-size="11.5" fill="var(--text-muted)">FastAPI, models,</text>
+                            <text x="99" y="185" font-size="11.5" fill="var(--text-muted)">indexes baked in</text>
+
+                            <g fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55" marker-end="url(#ar2)">
+                                <path d="M174 150 L246 88"/>
+                                <path d="M174 178 L246 240"/>
+                            </g>
+                            <defs>
+                                <marker id="ar2" markerWidth="9" markerHeight="9" refX="8" refY="3.2" orient="auto">
+                                    <path d="M0 0 L8 3.2 L0 6.4 z" fill="currentColor" opacity="0.55"/>
+                                </marker>
+                            </defs>
+
+                            <rect x="246" y="52" width="200" height="72" rx="8" fill="var(--surface-card)" stroke="var(--border-strong)" stroke-width="1.2"/>
+                            <text x="346" y="78" font-size="13.5" font-weight="600" fill="var(--text-primary)">Google Cloud Run</text>
+                            <text x="346" y="94" font-size="11.5" fill="var(--text-muted)">asia-northeast1 (Tokyo)</text>
+                            <text x="346" y="108" font-size="11.5" fill="var(--text-muted)">scale to zero, 8Gi</text>
+
+                            <rect x="246" y="204" width="200" height="72" rx="8" fill="var(--surface-card)" stroke="var(--border-strong)" stroke-width="1.2"/>
+                            <text x="346" y="230" font-size="13.5" font-weight="600" fill="var(--text-primary)">Hugging Face Spaces</text>
+                            <text x="346" y="246" font-size="11.5" fill="var(--text-muted)">free CPU tier</text>
+                            <text x="346" y="260" font-size="11.5" fill="var(--text-muted)">sleeps on inactivity</text>
+
+                            <rect x="518" y="128" width="178" height="72" rx="8" fill="var(--surface-raised)" stroke="var(--border-strong)" stroke-width="1.2"/>
+                            <text x="607" y="154" font-size="13.5" font-weight="600" fill="var(--text-primary)">Hub artifacts</text>
+                            <text x="607" y="170" font-size="11.5" fill="var(--text-muted)">FAISS indexes, embeddings,</text>
+                            <text x="607" y="183" font-size="11.5" fill="var(--text-muted)">BM25, ranker models</text>
+
+                            <g fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.4" stroke-dasharray="4 3">
+                                <path d="M446 88 L518 150"/>
+                                <path d="M446 240 L518 178"/>
+                            </g>
+
+                            <text x="360" y="312" font-size="12" fill="var(--text-muted)" font-family="Sora, sans-serif">One image, two runtimes, CPU only</text>
+                        </g>
+                    </svg>
+                    <figcaption>Figure 5. Deployment topology. The same image serves both targets; serving artifacts live in a Hugging Face dataset repository rather than in Git.</figcaption>
+                </figure>
+
+                <p>
+                    Two engineering decisions carried most of the weight here.
+                </p>
+                <p>
+                    <strong>Approximate nearest neighbour search.</strong> Swapping the exact FAISS index for an
+                    HNSW graph took median query time from 132.2 ms to 0.31 ms, roughly 400 times faster, and
+                    returned identical top-10 results on the queries sampled to check it. On a two-core CPU
+                    instance that difference is what separates a service that feels responsive from one that does
+                    not.
+                </p>
+                <p>
+                    <strong>Baking artifacts into the image.</strong> Indexes, embeddings, and models are built
+                    into the container rather than fetched at boot. It makes the image large, but a cold start
+                    that has to download several gigabytes before it can answer will not survive a platform's
+                    startup timeout. Both free tiers scale to zero, so cold starts are a fact of life and the
+                    frontend is written to show a warming state rather than a blank page.
+                </p>
+
+                <figure>
+                    <img src="../assets/img/mercato-jp.jpg" alt="The Mercato interface returning ranked results for a Japanese query, with the interface text switched to Japanese" width="1400" height="993" loading="lazy">
+                    <figcaption>Figure 6. The same service on the Japanese locale. Interface strings and result counts switch with the locale, which is selected explicitly rather than guessed from the query text.</figcaption>
+                </figure>
+
+                <p>
+                    Locale is an explicit parameter, not an inference. Automatic language detection on short
+                    queries is unreliable — a Japanese shopper searching for a romanised brand name would be
+                    routed to the wrong index — and a wrong guess is a worse failure than asking the user to pick.
+                </p>
+
+                <h2 id="next">What comes next</h2>
+
+                <p>
+                    The clearest gaps, in the order I would address them:
+                </p>
+                <ul>
+                    <li><strong>Japanese keyword tokenization is whitespace-based, not morphological.</strong>
+                        Japanese does not delimit words with spaces, so splitting on whitespace is crude. A
+                        morphological analyser such as MeCab, fugashi, or Sudachi is the correct tool. It is
+                        consistent between training and serving, so it is not producing wrong results — it is
+                        leaving quality on the table.</li>
+                    <li><strong>Normalization handles surface variation, not meaning.</strong> NFKC plus
+                        lowercasing unifies character widths and capitalisation. It does nothing for romanised
+                        spellings, brand synonyms, or typos. Synonym dictionaries cover the first two; approximate
+                        matching over retrieved candidates, with a library such as rapidfuzz, covers the third.</li>
+                    <li><strong>Japanese image coverage.</strong> The missing third channel and the two missing
+                        ranking features both trace back to one gap in the public data. That is what the ESCI-JP
+                        project is for.</li>
+                    <li><strong>Richer product text.</strong> Bullet points and colour are currently dropped from
+                        the embedded text. Adding them means re-embedding the corpus, which is a known cost with
+                        a documented procedure rather than an open question.</li>
+                </ul>
+
+                <div class="post-links">
+                    <a href="https://mercato-903037425525.asia-northeast1.run.app" target="_blank" rel="noopener" class="project-link primary">Live demo (Cloud Run)</a>
+                    <a href="https://huggingface.co/spaces/humayan-kabir/mercato" target="_blank" rel="noopener" class="project-link">Hugging Face Space</a>
+                    <a href="https://github.com/HumayanKabir-re/mercato" target="_blank" rel="noopener" class="project-link">Source</a>
+                </div>
+                <p class="post-note">
+                    Both deployments scale to zero, so the first request after a quiet period takes a while to
+                    answer.
+                </p>
+
+                <nav class="post-nav" aria-label="Post navigation">
+                    <a href="index.html"><span>Back to</span>All posts</a>
+                    <a href="round-wall.html" class="next"><span>Next</span>Round Wall</a>
+                </nav>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">&copy; <span data-year>2026</span> Humayan Kabir</p>
+                <div class="footer-links">
+                    <a href="https://github.com/HumayanKabir-re" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://linkedin.com/in/humayan-kabir-linked" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="mailto:humayan.kabir.official@gmail.com">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
