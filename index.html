@@ -27,6 +27,7 @@
     <meta property="twitter:description" content="Machine Learning Engineer in Dhaka, Bangladesh. Deep learning, LLMs, and data infrastructure, most recently a multilingual product search engine built and evaluated end to end.">
     <meta property="twitter:image" content="https://humayankabir-re.github.io/assets/img/profile-photo.jpg">
 
+    <link rel="canonical" href="https://humayankabir-re.github.io/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23c41e3a'/><text x='32' y='43' font-family='monospace' font-size='30' font-weight='700' fill='%23fff' text-anchor='middle'>HK</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,8 +40,11 @@
         (function () {
             var stored = null;
             try { stored = localStorage.getItem('theme'); } catch (e) {}
-            if (!stored && window.matchMedia('(prefers-color-scheme: light)').matches) stored = 'light';
-            document.documentElement.dataset.theme = stored === 'light' ? 'dark' : 'light';
+            // Explicit choice wins. Otherwise follow the device, so a visitor in dark mode is not hit with a white screen. Light is the fallback.
+            if (!stored) {
+                stored = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.dataset.theme = stored === 'dark' ? 'dark' : 'light';
         })();
     </script>
 </head>
@@ -136,7 +140,7 @@
 
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-    <nav class="nav" id="navbar">
+    <nav class="nav" id="navbar" aria-label="Primary">
         <div class="nav-container">
             <a href="#hero" class="nav-logo">HK<span class="cursor-blink">_</span></a>
             <div class="nav-menu" id="navMenu">
@@ -149,13 +153,8 @@
             </div>
             <div class="nav-actions">
                 <button class="theme-toggle" type="button" aria-label="Switch to dark theme">
-                    <svg class="icon-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
-                    </svg>
-                    <svg class="icon-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="4.2"/>
-                        <path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/>
-                    </svg>
+                    <svg class="icon-moon" width="19" height="19" aria-hidden="true"><use href="#moon"/></svg>
+                    <svg class="icon-sun" width="19" height="19" aria-hidden="true"><use href="#sun"/></svg>
                 </button>
                 <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
                     <span></span><span></span><span></span>
@@ -183,37 +182,26 @@
                     <div class="hero-cta">
                         <a href="#projects" class="btn btn-primary">
                             <span>View Projects</span>
-                            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-                                <path d="M7 3L14 10L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg width="18" height="18" aria-hidden="true"><use href="#chevron-right"/></svg>
                         </a>
                         <a href="assets/Humayan_Kabir_Resume.pdf" class="btn btn-secondary" download>
-                            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M10 3v11m0 0l-4-4m4 4l4-4M3 17h14" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg width="18" height="18" aria-hidden="true"><use href="#download"/></svg>
                             <span>Download Resume</span>
                         </a>
                         <a href="#contact" class="btn btn-secondary">Get in Touch</a>
                     </div>
                     <div class="hero-social">
                         <a href="https://github.com/HumayanKabir-re" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
-                            <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                            </svg>
+                            <svg width="21" height="21" aria-hidden="true"><use href="#github"/></svg>
                         </a>
                         <a href="https://linkedin.com/in/humayan-kabir-linked" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
-                            <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
+                            <svg width="21" height="21" aria-hidden="true"><use href="#linkedin"/></svg>
                         </a>
                         <a href="https://x.com/hk_on_x" target="_blank" rel="noopener" class="social-link" aria-label="X">
                             <svg width="21" height="21" aria-hidden="true"><use href="#x"/></svg>
                         </a>
                         <a href="mailto:humayan.kabir.official@gmail.com" class="social-link" aria-label="Email">
-                            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
+                            <svg width="21" height="21" aria-hidden="true"><use href="#mail"/></svg>
                         </a>
                     </div>
                 </div>
@@ -286,11 +274,7 @@
                 <article class="project-card featured" data-animate>
                     <div class="project-header">
                         <div class="project-icon">
-                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                                <circle cx="17" cy="17" r="10"/>
-                                <path d="M25 25l8 8"/>
-                                <path d="M12 17h10M17 12v10" stroke-width="1.5"/>
-                            </svg>
+                            <svg width="34" height="34" aria-hidden="true"><use href="#search"/></svg>
                         </div>
                         <span class="status status-live">Live</span>
                     </div>
@@ -325,10 +309,7 @@
                 <article class="project-card" data-animate>
                     <div class="project-header">
                         <div class="project-icon">
-                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M8 28V12M16 28V18M24 28V22M32 28V26"/>
-                                <path d="M6 32h28"/>
-                            </svg>
+                            <svg width="34" height="34" aria-hidden="true"><use href="#bars"/></svg>
                         </div>
                         <span class="status status-complete">Complete</span>
                     </div>
@@ -357,11 +338,7 @@
                 <article class="project-card" data-animate>
                     <div class="project-header">
                         <div class="project-icon">
-                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="7" y="9" width="18" height="14" rx="2"/>
-                                <path d="M7 19l5-4 5 4 3-2 5 4"/>
-                                <path d="M20 29h13M20 33h9"/>
-                            </svg>
+                            <svg width="34" height="34" aria-hidden="true"><use href="#image-text"/></svg>
                         </div>
                         <span class="status status-progress">In development</span>
                     </div>
@@ -386,11 +363,7 @@
                 <article class="project-card" data-animate>
                     <div class="project-header">
                         <div class="project-icon">
-                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 6v28M6 20h28"/>
-                                <circle cx="20" cy="20" r="14"/>
-                                <path d="M20 6c4 4 4 24 0 28M20 6c-4 4-4 24 0 28"/>
-                            </svg>
+                            <svg width="34" height="34" aria-hidden="true"><use href="#globe"/></svg>
                         </div>
                         <span class="status status-progress">In development</span>
                     </div>
@@ -416,11 +389,7 @@
                 <article class="project-card" data-animate>
                     <div class="project-header">
                         <div class="project-icon">
-                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-                                <path d="M10 15 L20 10 L30 15 L20 20 Z"/>
-                                <path d="M10 20 L20 25 L30 20"/>
-                                <path d="M10 25 L20 30 L30 25"/>
-                            </svg>
+                            <svg width="34" height="34" aria-hidden="true"><use href="#layers"/></svg>
                         </div>
                         <span class="status status-prototype">Prototype</span>
                     </div>
@@ -442,10 +411,7 @@
                 <article class="project-card" data-animate>
                     <div class="project-header">
                         <div class="project-icon">
-                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                                <circle cx="20" cy="20" r="14"/>
-                                <path d="M20 11v9l6 4"/>
-                            </svg>
+                            <svg width="34" height="34" aria-hidden="true"><use href="#clock"/></svg>
                         </div>
                     </div>
                     <h3 class="project-title">LLM Powered Cloud Automation Pipeline</h3>
@@ -467,11 +433,7 @@
                 <article class="project-card" data-animate>
                     <div class="project-header">
                         <div class="project-icon">
-                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M8 30c6-2 8-18 12-18s6 16 12 14"/>
-                                <circle cx="8" cy="30" r="2"/>
-                                <circle cx="32" cy="26" r="2"/>
-                            </svg>
+                            <svg width="34" height="34" aria-hidden="true"><use href="#curve"/></svg>
                         </div>
                         <span class="status status-complete">Complete</span>
                     </div>
@@ -497,9 +459,7 @@
                 <article class="project-card" data-animate>
                     <div class="project-header">
                         <div class="project-icon">
-                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 30V18a2.5 2.5 0 015 0v-2a2.5 2.5 0 015 0v2a2.5 2.5 0 015 0v8a6 6 0 01-6 6h-4a8 8 0 01-8-8v-6a2.5 2.5 0 015 0"/>
-                            </svg>
+                            <svg width="34" height="34" aria-hidden="true"><use href="#hand"/></svg>
                         </div>
                         <span class="status status-complete">Complete</span>
                     </div>
@@ -525,10 +485,7 @@
                 <article class="project-card" data-animate>
                     <div class="project-header">
                         <div class="project-icon">
-                            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="6" y="8" width="28" height="18" rx="2"/>
-                                <path d="M10 21l5-6 4 4 4-7 5 9M14 32h12"/>
-                            </svg>
+                            <svg width="34" height="34" aria-hidden="true"><use href="#monitor"/></svg>
                         </div>
                     </div>
                     <h3 class="project-title">High-Availability Real-Time Monitoring System</h3>
@@ -735,28 +692,19 @@
                     </p>
                     <div class="contact-list">
                         <a href="mailto:humayan.kabir.official@gmail.com" class="contact-item" data-copy="humayan.kabir.official@gmail.com">
-                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
+                            <svg width="17" height="17" aria-hidden="true"><use href="#mail"/></svg>
                             <span class="copy-label">humayan.kabir.official@gmail.com</span>
                         </a>
                         <a href="tel:+8801689961673" class="contact-item" data-copy="+8801689961673">
-                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/>
-                            </svg>
+                            <svg width="17" height="17" aria-hidden="true"><use href="#phone"/></svg>
                             <span class="copy-label">+880-1689961673</span>
                         </a>
                         <a href="https://linkedin.com/in/humayan-kabir-linked" target="_blank" rel="noopener" class="contact-item">
-                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
+                            <svg width="17" height="17" aria-hidden="true"><use href="#linkedin"/></svg>
                             <span>linkedin.com/in/humayan-kabir-linked</span>
                         </a>
                         <a href="https://github.com/HumayanKabir-re" target="_blank" rel="noopener" class="contact-item">
-                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                            </svg>
+                            <svg width="17" height="17" aria-hidden="true"><use href="#github"/></svg>
                             <span>github.com/HumayanKabir-re</span>
                         </a>
                     </div>
@@ -788,9 +736,7 @@
     </footer>
 
     <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg width="20" height="20" aria-hidden="true"><use href="#arrow-up"/></svg>
     </button>
 
     <script src="assets/js/main.js"></script>

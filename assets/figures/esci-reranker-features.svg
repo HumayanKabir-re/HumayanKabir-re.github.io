@@ -1,0 +1,23 @@
+<svg viewBox="0 0 818 142" width="818" height="142" role="img" aria-label="Reranker feature counts: ten for English, eight for Japanese" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="Sora, sans-serif">
+    <g stroke="currentColor" opacity="0.16" stroke-width="1">
+      <path d="M124 14 V94"/>
+      <path d="M124 94 H744"/>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="11.5" fill="var(--text-muted)" text-anchor="middle">
+      <text x="124" y="112">0.00</text>
+      <text x="248" y="112">2.00</text>
+      <text x="372" y="112">4.00</text>
+      <text x="496" y="112">6.00</text>
+      <text x="620" y="112">8.00</text>
+      <text x="744" y="112">10.00</text>
+    </g>
+    <text x="110" y="31" font-size="12.5" text-anchor="end" fill="var(--text-primary)">English</text>
+    <rect x="124" y="14" width="620" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="756" y="31" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="500" fill="var(--text-primary)">10</text>
+    <text x="110" y="75" font-size="12.5" text-anchor="end" fill="var(--text-primary)">Japanese</text>
+    <rect x="124" y="58" width="496" height="26" rx="3" fill="var(--accent)" opacity="0.9"/>
+    <text x="632" y="75" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="500" fill="var(--text-primary)">8</text>
+    <text x="434" y="134" font-size="11.5" fill="var(--text-muted)" text-anchor="middle">Ranking features available per locale</text>
+  </g>
+</svg>

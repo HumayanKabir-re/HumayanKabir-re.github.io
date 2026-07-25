@@ -1,0 +1,28 @@
+<svg viewBox="0 0 744 310" width="744" height="310" role="img" aria-label="Coverage matrix comparing English and Japanese locales across queries, products, judgments, text index and image vectors. Japanese has more of everything except image vectors, which do not exist." xmlns="http://www.w3.org/2000/svg">
+  <g font-family="Sora, sans-serif">
+    <text x="417" y="36" font-size="13" font-weight="700" text-anchor="middle" fill="var(--text-primary)">English</text>
+    <text x="627" y="36" font-size="13" font-weight="700" text-anchor="middle" fill="var(--text-primary)">Japanese</text>
+    <path d="M12 52 H732" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="78" font-size="12.5" fill="var(--text-secondary)">Queries</text>
+    <text x="417" y="78" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="var(--text-primary)">8,956</text>
+    <text x="627" y="78" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="var(--text-primary)">10,407</text>
+    <path d="M12 96 H732" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="122" font-size="12.5" fill="var(--text-secondary)">Products</text>
+    <text x="417" y="122" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="var(--text-primary)">164,900</text>
+    <text x="627" y="122" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="var(--text-primary)">233,850</text>
+    <path d="M12 140 H732" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="166" font-size="12.5" fill="var(--text-secondary)">Graded judgments</text>
+    <text x="417" y="166" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="var(--text-primary)">181,701</text>
+    <text x="627" y="166" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="var(--text-primary)">297,883</text>
+    <path d="M12 184 H732" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="210" font-size="12.5" fill="var(--text-secondary)">Text index</text>
+    <path d="M411 206 l4 4 l8 -9" fill="none" stroke="var(--text-secondary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M621 206 l4 4 l8 -9" fill="none" stroke="var(--text-secondary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 228 H732" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="254" font-size="12.5" fill="var(--text-secondary)">Public image vectors</text>
+    <path d="M411 250 l4 4 l8 -9" fill="none" stroke="var(--text-secondary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="627" y="254" font-family="JetBrains Mono, monospace" font-size="15" font-weight="700" text-anchor="middle" fill="var(--accent)">none</text>
+    <path d="M12 272 H732" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="372" y="302" font-size="11.5" text-anchor="middle" fill="var(--text-muted)">Japanese carries more of everything except the one thing that cannot be bought</text>
+  </g>
+</svg>

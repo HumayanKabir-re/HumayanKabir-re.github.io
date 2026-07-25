@@ -32,11 +32,12 @@
 
     --text-primary: #16181d;
     --text-secondary: #4a5058;
-    --text-muted: #767c85;
+    --text-muted: #6c727b;
 
     --accent: #c41e3a;
     --accent-hover: #a3182f;
     --accent-wash: rgba(196, 30, 58, 0.07);
+    --on-accent: #ffffff;
 
     --border: #e4e6e9;
     --border-strong: #cfd3d8;
@@ -77,11 +78,12 @@
 
     --text-primary: #e8eaed;
     --text-secondary: #9ca3af;
-    --text-muted: #6b7280;
+    --text-muted: #838a98;
 
     --accent: #00d9ff;
     --accent-hover: #5ce6ff;
     --accent-wash: rgba(0, 217, 255, 0.1);
+    --on-accent: #0a0e17;
 
     --border: #22304a;
     --border-strong: #33456a;
@@ -159,7 +161,7 @@ a {
     padding: 0.75rem 1.25rem;
     background: var(--accent);
     border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-    color: #fff;
+    color: var(--on-accent);
     font-size: 0.9rem;
 }
 
@@ -494,7 +496,7 @@ a {
 
 .btn-primary {
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
 }
 
 .btn-primary:hover {
@@ -818,10 +820,10 @@ section {
     background: currentColor;
 }
 
-.status-live       { background: rgba(22, 143, 91, 0.12); color: #168f5b; }
-.status-complete   { background: rgba(58, 106, 191, 0.12); color: #3a6abf; }
-.status-progress   { background: rgba(191, 124, 30, 0.14); color: #a9691a; }
-.status-prototype  { background: rgba(120, 110, 190, 0.14); color: #6c62b8; }
+.status-live       { background: rgba(22, 143, 91, 0.12); color: #027b47; }
+.status-complete   { background: rgba(58, 106, 191, 0.12); color: #3868bd; }
+.status-progress   { background: rgba(191, 124, 30, 0.14); color: #9d5d0e; }
+.status-prototype  { background: rgba(120, 110, 190, 0.14); color: #685eb4; }
 
 [data-theme="dark"] .status-live      { background: rgba(52, 211, 153, 0.14); color: #34d399; }
 [data-theme="dark"] .status-complete  { background: rgba(96, 165, 250, 0.14); color: #60a5fa; }
@@ -1140,6 +1142,7 @@ section {
 }
 
 .post-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
@@ -1154,7 +1157,14 @@ section {
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
     outline: 1px solid var(--accent);
-    outline-radius: var(--radius);
+    /* border-radius: var(--radius); */
+}
+
+/* One anchor covers the whole card. Nesting a second <a> is invalid and the browser recovers by splitting it, which leaves most of the card dead. */
+.post-card-title a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
 }
 
 .post-card-art {
@@ -1443,10 +1453,21 @@ figure {
 }
 
 
+/* 
+Figures render at their intrinsic size. 
+Below the min-width the wrapper pans rather than scaling the diagram down until its labels are unreadable. 
+*/
+.figure-scroll {
+    overflow-x: auto;
+}
+
 figure svg {
     display: block;
-    width: 100%;
+    width: auto;
+    min-width: 560px;
+    max-width: 100%;
     height: auto;
+    margin: 0 auto;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     background: var(--surface-sunken);

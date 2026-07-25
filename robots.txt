@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://humayankabir-re.github.io/sitemap.xml

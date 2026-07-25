@@ -1,0 +1,23 @@
+<svg viewBox="0 0 688 196" width="688" height="196" role="img" aria-label="Distribution model: a source image is encoded to a CLIP vector, which is published with a reference back to the original. The image itself is never redistributed." xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="3.2" orient="auto">
+      <path d="M0 0 L8 3.2 L0 6.4 z" fill="currentColor" opacity="0.55"/>
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55" marker-end="url(#arrow)">
+    <path d="M180 81 L240 81"/>
+    <path d="M412 81 L472 81"/>
+  </g>
+  <g font-family="Sora, sans-serif" text-anchor="middle">
+    <rect x="12" y="49" width="168" height="64" rx="7" fill="var(--surface-card)" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="96" y="77" font-size="14.5" font-weight="700" fill="var(--text-primary)">Source image</text>
+    <text x="96" y="96" font-size="12.5" fill="var(--text-muted)">stays with its owner</text>
+    <rect x="244" y="49" width="168" height="64" rx="7" fill="var(--surface-raised)" stroke="var(--border-strong)" stroke-width="1.2"/>
+    <text x="328" y="77" font-size="14.5" font-weight="700" fill="var(--text-primary)">CLIP encoder</text>
+    <text x="328" y="96" font-size="12.5" fill="var(--text-muted)">same space as Mercato</text>
+    <rect x="476" y="49" width="200" height="64" rx="7" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.4"/>
+    <text x="576" y="77" font-size="14.5" font-weight="700" fill="var(--text-primary)">Vector + reference</text>
+    <text x="576" y="96" font-size="12.5" fill="var(--text-muted)">no pixels redistributed</text>
+    <text x="344" y="184" font-size="12" fill="var(--text-muted)">Embeddings and references travel. Images do not.</text>
+  </g>
+</svg>
