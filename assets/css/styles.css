@@ -328,6 +328,9 @@ a {
     color: var(--text-secondary);
     cursor: pointer;
     transition: color var(--ease), background-color var(--ease);
+    /* outline: 1px solid var(--accent); */
+    /* border-radius: 2px; */
+    color: var(--accent);
 }
 
 .theme-toggle:hover,
