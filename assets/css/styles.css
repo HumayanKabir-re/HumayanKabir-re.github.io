@@ -542,10 +542,10 @@ a {
 }
 
 .mouse {
-    width: 22px;
-    height: 34px;
+    width: 33px;
+    height: 51px;
     padding-top: 6px;
-    border: 2px solid var(--border-strong);
+    border: 3px solid var(--accent);
     border-radius: var(--radius-pill);
 }
 
@@ -788,6 +788,12 @@ section {
     white-space: nowrap;
 }
 
+.tag:hover {
+    /* background: var(--accent-wash); */
+    color: var(--text--primary);
+    border-color: solid var(--accent);
+}
+
 /* --- Status chips ------------------------------------------------------ */
 
 .status {
@@ -839,14 +845,14 @@ section {
 }
 
 .project-card:hover {
-    border-color: var(--border-strong);
+    border-color: var(--accent);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
 
 .project-card.featured {
     border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent);
+    box-shadow: 0 0 0 0px var(--accent);
 }
 
 .project-header {
@@ -941,6 +947,10 @@ section {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--surface-card);
+}
+
+.skill-group:hover {
+    border-color: var(--accent);
 }
 
 .skill-group h3 {
@@ -1142,7 +1152,7 @@ section {
     border-color: var(--accent-wash);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
-    outline: 2px solid var(--accent);
+    outline: 1px solid var(--accent);
     outline-radius: var(--radius);
 }
 
