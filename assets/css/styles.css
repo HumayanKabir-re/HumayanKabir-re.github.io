@@ -790,6 +790,7 @@ section {
 
 .tag:hover {
     /* background: var(--accent-wash); */
+    background: var(var(--surface-raised) * 10%);
     color: solid var(--text--primary);
     border-color: solid var(--accent);
 }
