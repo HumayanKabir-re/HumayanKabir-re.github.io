@@ -1,7 +1,6 @@
-/* 
-Site behaviour: theme, loading screen, hero typing, navigation, reveals.
-The theme itself is applied by a small inline block in the head so the page never paints in the wrong palette first.
-*/
+// Site behaviour: theme, loading screen, hero typing, navigation, reveals.
+// The theme itself is applied by a small inline block in the head so the
+// page never paints in the wrong palette first.
 
 (function () {
     'use strict';
@@ -9,6 +8,7 @@ The theme itself is applied by a small inline block in the head so the page neve
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const root = document.documentElement;
 
+    // --- Theme -------------------------------------------------------
     function setupTheme() {
         const toggle = document.querySelector('.theme-toggle');
         if (!toggle) return;
@@ -21,13 +21,22 @@ The theme itself is applied by a small inline block in the head so the page neve
             try {
                 localStorage.setItem('theme', next);
             } catch (err) {
-                // Private browsing can refuse writes. The theme still applies for this page load, it just will not be remembered.
+                // Private browsing can refuse writes. The theme still applies
+                // for this page load, it just will not be remembered.
             }
 
             document.dispatchEvent(new CustomEvent('themechange', { detail: next }));
         });
     }
 
+    // --- Footer year -------------------------------------------------
+    function setFooterYear() {
+        document.querySelectorAll('[data-year]').forEach((el) => {
+            el.textContent = String(new Date().getFullYear());
+        });
+    }
+
+    // --- Loading screen ----------------------------------------------
     function setupLoadingScreen() {
         const screen = document.getElementById('loadingScreen');
         if (!screen) return;
@@ -66,6 +75,7 @@ The theme itself is applied by a small inline block in the head so the page neve
         }
     }
 
+    // --- Hero typing effect ------------------------------------------
     function setupTypingEffect() {
         const target = document.getElementById('typingText');
         if (!target) return;
@@ -107,6 +117,7 @@ The theme itself is applied by a small inline block in the head so the page neve
         })();
     }
 
+    // --- Navigation bar ----------------------------------------------
     function setupNavbar() {
         const nav = document.getElementById('navbar');
         if (!nav) return;
@@ -116,6 +127,7 @@ The theme itself is applied by a small inline block in the head so the page neve
         window.addEventListener('scroll', onScroll, { passive: true });
     }
 
+    // --- Mobile navigation -------------------------------------------
     function setupMobileNav() {
         const toggle = document.getElementById('navToggle');
         const menu = document.getElementById('navMenu');
@@ -140,6 +152,7 @@ The theme itself is applied by a small inline block in the head so the page neve
         });
     }
 
+    // --- Scroll reveal -----------------------------------------------
     function setupReveals() {
         const targets = document.querySelectorAll('[data-animate]');
         if (!targets.length) return;
@@ -162,6 +175,7 @@ The theme itself is applied by a small inline block in the head so the page neve
         targets.forEach((el) => observer.observe(el));
     }
 
+    // --- Active section highlight ------------------------------------
     function setupActiveSection() {
         const sections = document.querySelectorAll('main section[id], section[id]');
         const links = document.querySelectorAll('.nav-link[href^="#"]');
@@ -179,6 +193,7 @@ The theme itself is applied by a small inline block in the head so the page neve
         sections.forEach((section) => observer.observe(section));
     }
 
+    // --- Back to top -------------------------------------------------
     function setupBackToTop() {
         const button = document.getElementById('backToTop');
         if (!button) return;
@@ -195,7 +210,7 @@ The theme itself is applied by a small inline block in the head so the page neve
         });
     }
 
-    // Email and phone rows copy on click, with the label restored afterwards.
+    // --- Copy to clipboard -------------------------------------------
     function setupCopyToClipboard() {
         document.querySelectorAll('[data-copy]').forEach((el) => {
             el.addEventListener('click', (e) => {
@@ -217,12 +232,7 @@ The theme itself is applied by a small inline block in the head so the page neve
         });
     }
 
-    function setFooterYear() {
-        document.querySelectorAll('[data-year]').forEach((el) => {
-            el.textContent = String(new Date().getFullYear());
-        });
-    }
-
+    // --- Boot ------------------------------------------------------
     setupTheme();
     setFooterYear();
     setupLoadingScreen();

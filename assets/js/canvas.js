@@ -9,6 +9,7 @@
     const ctx = canvas.getContext('2d');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+    // --- Tuning ------------------------------------------------------
     const MAX_LINK_DISTANCE = 150;
     const POINTER_RADIUS = 150;
     const POINTER_FORCE = 0.15;
@@ -24,6 +25,7 @@
     let heroVisible = true;
     let palette = readPalette();
 
+    // --- Palette, read from the theme tokens -------------------------
     function readPalette() {
         const style = getComputedStyle(document.documentElement);
         const read = (name, fallback) => (style.getPropertyValue(name).trim() || fallback);
@@ -36,6 +38,7 @@
         };
     }
 
+    // --- Particle field ----------------------------------------------
     function particleCount() {
         return isMobile ? 25 : 80;
     }
@@ -47,6 +50,7 @@
     // The CSS sizes this canvas to its parent, so the backing store has to be
     // derived from the rendered box rather than the window. Without this the
     // nodes render blurred and oversized on high-density screens.
+    // --- Sizing, DPR-correct -----------------------------------------
     function resize() {
         const rect = canvas.getBoundingClientRect();
         if (!rect.width || !rect.height) return;
@@ -89,6 +93,7 @@
         }
     }
 
+    // --- Pointer tracking --------------------------------------------
     const pointer = { x: null, y: null };
 
     // Bound to the window rather than the canvas: the hero copy sits above the
@@ -103,6 +108,7 @@
         pointer.y = inside ? y : null;
     }
 
+    // --- Drawing -----------------------------------------------------
     function step() {
         ctx.clearRect(0, 0, width, height);
 
@@ -163,10 +169,11 @@
         });
     }
 
+    // --- Animation loop and lifecycle --------------------------------
     function loop() {
         if (resizePending) {
             resizePending = false;
-            resize();
+    resize();
         }
 
         step();
@@ -196,6 +203,7 @@
         }
     }
 
+    // --- Boot and event wiring ---------------------------------------
     resize();
 
     if (reduceMotion.matches) {

@@ -1,3 +1,27 @@
+/* Mercato portfolio styles
+ *
+ *   Theme tokens
+ *   Loading screen
+ *   Navigation
+ *   Hero
+ *   Section scaffolding
+ *   About
+ *   Experience timeline
+ *   Tags
+ *   Status chips
+ *   Projects
+ *   Skills
+ *   Contact
+ *   Footer
+ *   Back to top
+ *   Blog index
+ *   Blog post
+ *
+ * Responsive rules sit with the component they modify rather than in one
+ * block at the end. Breakpoints: 640, 900, 1200.
+ */
+
+/* --- Theme tokens ----------------------------------------------- */
 /* Light is the default. Dark is the original site palette, kept intact. */
 
 :root {
@@ -120,6 +144,13 @@ a {
     padding: 0 1.25rem;
 }
 
+@media (min-width: 640px) {
+    .container,
+    .nav-container {
+        padding: 0 2rem;
+    }
+}
+
 .skip-to-content {
     position: absolute;
     top: -100%;
@@ -136,7 +167,7 @@ a {
     top: 0;
 }
 
-/* Loading screen */
+/* --- Loading screen ---------------------------------------------------- */
 
 .loading-screen {
     position: fixed;
@@ -194,7 +225,7 @@ a {
     font-size: 0.8rem;
 }
 
-/* Navigation */
+/* --- Navigation -------------------------------------------------------- */
 
 .nav {
     position: fixed;
@@ -305,6 +336,26 @@ a {
     color: var(--accent);
 }
 
+
+@media (min-width: 900px) {
+    .nav-menu {
+        position: static;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+        max-height: none;
+        padding: 0;
+        border: 0;
+        background: none;
+        overflow: visible;
+        box-shadow: none;
+    }
+
+    .nav-toggle {
+        display: none;
+    }
+}
+
 /* Only one icon is ever shown; the other is swapped out by theme. */
 .theme-toggle .icon-sun { display: none; }
 [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
@@ -335,7 +386,7 @@ a {
     transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Hero */
+/* --- Hero -------------------------------------------------------------- */
 
 .hero {
     position: relative;
@@ -356,6 +407,12 @@ a {
     display: block;
     width: 100%;
     height: 100%;
+}
+
+/* <main> is a flex item here, so without this it shrinks to its content and
+   the hero sits left of every section below it. */
+.hero > main {
+    width: 100%;
 }
 
 .hero .container,
@@ -504,7 +561,14 @@ a {
     100% { opacity: 0; transform: translateY(10px); }
 }
 
-/* Section scaffolding */
+
+@media (min-width: 1200px) {
+    .hero-description {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- Section scaffolding ----------------------------------------------- */
 
 section {
     padding: var(--space-lg) 0;
@@ -530,7 +594,14 @@ section {
     letter-spacing: -0.02em;
 }
 
-/* About */
+
+@media (min-width: 900px) {
+    section {
+        padding: var(--space-xl) 0;
+    }
+}
+
+/* --- About ------------------------------------------------------------- */
 
 .about-grid {
     display: grid;
@@ -593,7 +664,26 @@ section {
     height: auto;
 }
 
-/* Experience timeline */
+
+@media (min-width: 640px) {
+    .highlight-number {
+        font-size: 1.9rem;
+    }
+
+    .highlight-label {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1.5fr 1fr;
+        align-items: start;
+        gap: var(--space-lg);
+    }
+}
+
+/* --- Experience timeline ----------------------------------------------- */
 
 .timeline {
     position: relative;
@@ -665,7 +755,18 @@ section {
     margin-top: 0.4rem;
 }
 
-/* Tags, shared by experience, projects and blog */
+
+@media (min-width: 900px) {
+    .timeline {
+        padding-left: 2rem;
+    }
+
+    .timeline-item::before {
+        left: -2rem;
+    }
+}
+
+/* --- Tags -------------------------------------------------------------- */
 
 .tag-row {
     display: flex;
@@ -684,7 +785,7 @@ section {
     white-space: nowrap;
 }
 
-/* Status chips */
+/* --- Status chips ------------------------------------------------------ */
 
 .status {
     display: inline-flex;
@@ -717,7 +818,7 @@ section {
 [data-theme="dark"] .status-progress  { background: rgba(251, 191, 36, 0.14); color: #fbbf24; }
 [data-theme="dark"] .status-prototype { background: rgba(167, 139, 250, 0.16); color: #a78bfa; }
 
-/* Projects */
+/* --- Projects ---------------------------------------------------------- */
 
 .projects-grid {
     display: grid;
@@ -778,6 +879,19 @@ section {
     margin-bottom: 1rem;
 }
 
+
+@media (min-width: 640px) {
+    .projects-grid, .skills-grid, .post-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .projects-grid, .skills-grid, .post-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 /* Pushes the link row to the card floor so cards in a row line up. */
 .project-links {
     display: flex;
@@ -812,7 +926,7 @@ section {
     color: var(--accent);
 }
 
-/* Skills */
+/* --- Skills ------------------------------------------------------------ */
 
 .skills-grid {
     display: grid;
@@ -833,7 +947,7 @@ section {
     font-weight: 600;
 }
 
-/* Contact */
+/* --- Contact ----------------------------------------------------------- */
 
 .contact-grid {
     display: grid;
@@ -895,7 +1009,15 @@ section {
     font-size: 0.92rem;
 }
 
-/* Footer */
+
+@media (min-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1.4fr 1fr;
+        gap: var(--space-lg);
+    }
+}
+
+/* --- Footer ------------------------------------------------------------ */
 
 .footer {
     padding: var(--space-md) 0;
@@ -933,7 +1055,16 @@ section {
     color: var(--accent);
 }
 
-/* Back to top */
+
+@media (min-width: 640px) {
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+}
+
+/* --- Back to top ------------------------------------------------------- */
 
 .back-to-top {
     position: fixed;
@@ -965,7 +1096,15 @@ section {
     color: var(--accent);
 }
 
-/* Blog index */
+
+@media (min-width: 900px) {
+    .back-to-top {
+        right: 2rem;
+        bottom: 2rem;
+    }
+}
+
+/* --- Blog index -------------------------------------------------------- */
 
 .page-header {
     padding: 7rem 0 var(--space-md);
@@ -997,15 +1136,19 @@ section {
 }
 
 .post-card:hover {
-    border-color: var(--border-strong);
+    border-color: var(--accent-wash);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
+    /* background: var(--accent-wash); */
+    color: var(--accent);
 }
 
 .post-card-art {
     display: block;
     width: 100%;
     height: 150px;
+    /* Without this the card crops by stretching, not by cropping. */
+    object-fit: cover;
     border-bottom: 1px solid var(--border);
     background: var(--surface-sunken);
 }
@@ -1054,15 +1197,27 @@ section {
     padding-top: 0.5rem;
 }
 
-/* Blog post */
+/* --- Blog post --------------------------------------------------------- */
 
 .post {
     padding: 6.5rem 0 var(--space-lg);
 }
 
+
+@media (min-width: 640px) {
+    .post-wrap {
+        padding: 0 2rem;
+    }
+
+    .post-nav {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Same container as the homepage, so the blog reads as the same site. */
 .post-wrap {
     width: 100%;
-    max-width: 52rem;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 0 1.25rem;
 }
@@ -1166,7 +1321,8 @@ section {
 .post-body p,
 .post-body li {
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: 1.075rem;
+    line-height: 1.75;
 }
 
 .post-body ul,
@@ -1226,70 +1382,19 @@ figure {
 }
 
 .post-note {
-    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 1.5rem;
     color: var(--text-muted);
     font-size: 0.85rem;
-}
-
-figure svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    background: var(--surface-sunken);
-}
-
-figure img {
-    width: 100%;
-    height: auto;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-}
-
-figcaption {
-    margin-top: 0.6rem;
-    color: var(--text-muted);
-    font-size: 0.82rem;
-    line-height: 1.55;
-    text-align: center;
-}
-
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.88rem;
-}
-
-.data-table th,
-.data-table td {
-    padding: 0.5rem 0.7rem;
     border-bottom: 1px solid var(--border);
-    text-align: left;
-}
-
-.data-table th {
-    color: var(--text-primary);
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    font-weight: 500;
-}
-
-.data-table td {
-    color: var(--text-secondary);
-}
-
-.table-scroll {
-    overflow-x: auto;
 }
 
 .post-links {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: 2.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    padding-bottom: 1.5rem;
 }
 
 .post-nav {
@@ -1323,6 +1428,59 @@ figcaption {
     text-align: right;
 }
 
+
+figure svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-sunken);
+}
+
+figure img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+
+figcaption {
+    margin-top: 0.6rem;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    text-align: center;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+.data-table th {
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 500;
+}
+
+.data-table td {
+    color: var(--text-secondary);
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
 /* Scroll reveal. Elements are visible by default so the page still reads
    with JavaScript off; the script adds .reveal-init to opt them in. */
 
@@ -1337,110 +1495,22 @@ figcaption {
     transform: none;
 }
 
-@media (min-width: 640px) {
-    .container,
-    .nav-container {
-        padding: 0 2rem;
-    }
-
-    .post-wrap {
-        padding: 0 2rem;
-    }
-
-    .highlight-number {
-        font-size: 1.9rem;
-    }
-
-    .highlight-label {
-        font-size: 0.8rem;
-    }
-
-    .projects-grid,
-    .skills-grid,
-    .post-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .post-nav {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .footer-content {
-        flex-direction: row;
-        justify-content: space-between;
-        text-align: left;
-    }
+.dashed-bullets {
+  list-style-type: none; /* Removes standard bullets */
+  padding-left: 0;       /* Removes default indentation */
+  margin-bottom: 0rem;
 }
-
-@media (min-width: 900px) {
-    section {
-        padding: var(--space-xl) 0;
-    }
-
-    .nav-menu {
-        position: static;
-        flex-direction: row;
-        align-items: center;
-        gap: 1.5rem;
-        max-height: none;
-        padding: 0;
-        border: 0;
-        background: none;
-        overflow: visible;
-        box-shadow: none;
-    }
-
-    .nav-toggle {
-        display: none;
-    }
-
-    .about-grid {
-        grid-template-columns: 1.5fr 1fr;
-        align-items: start;
-        gap: var(--space-lg);
-    }
-
-    .contact-grid {
-        grid-template-columns: 1.4fr 1fr;
-        gap: var(--space-lg);
-    }
-
-    .timeline {
-        padding-left: 2rem;
-    }
-
-    .timeline-item::before {
-        left: -2rem;
-    }
-
-    .back-to-top {
-        right: 2rem;
-        bottom: 2rem;
-    }
+.dashed-bullets li {
+  position: relative;
+  padding-left: 1rem;    /* Makes space for the custom dash */
+  margin-bottom: 0.5rem;    /* Adds space between items */
+  font-size: 1rem;          /* Sets font size */
 }
-
-@media (min-width: 1000px) {
-    /* Figures break out of the prose column up to the same width the homepage
-       uses. Diagrams and screenshots need the room; running text does not, so
-       the measure stays readable while the visuals get full width. */
-    .post-wrap figure {
-        position: relative;
-        left: 50%;
-        width: min(1180px, calc(100vw - 4rem));
-        transform: translateX(-50%);
-    }
-}
-
-@media (min-width: 1200px) {
-    .projects-grid,
-    .skills-grid,
-    .post-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .hero-description {
-        font-size: 1.1rem;
-    }
+.dashed-bullets li::before {
+  content: "-";          /* Inserts an em-dash */
+  position: absolute;
+  left: 0;               /* Aligns dash to the far left */
+  color: var(--text-muted);
 }
 
 @media (prefers-reduced-motion: reduce) {
