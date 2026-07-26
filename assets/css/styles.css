@@ -1144,6 +1144,10 @@ section {
     padding-bottom: var(--space-lg);
 }
 
+.post-card.featured {
+    border-color: var(--accent);
+}
+
 .post-card {
     position: relative;
     display: flex;
