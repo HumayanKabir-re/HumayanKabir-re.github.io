@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1101 398" width="1101" height="398" role="img" aria-label="Per-round results for a linear probe and an MLP. Both collapse at round five, so the null result is not a capacity artifact." xmlns="http://www.w3.org/2000/svg">
+  <g font-family="Sora, sans-serif">
+    <text x="444" y="36" font-size="16" font-weight="700" text-anchor="middle" fill="var(--text-primary)">Linear probe</text>
+    <text x="702" y="36" font-size="16" font-weight="700" text-anchor="middle" fill="var(--text-primary)">MLP</text>
+    <text x="960" y="36" font-size="16" font-weight="700" text-anchor="middle" fill="var(--text-primary)">Seed spread</text>
+    <path d="M12 52 H1089" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="78" font-size="14.5" fill="var(--text-secondary)">Round 1</text>
+    <text x="444" y="78" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0660</text>
+    <text x="702" y="78" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0784</text>
+    <text x="960" y="78" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">0.0007</text>
+    <path d="M12 96 H1089" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="122" font-size="14.5" fill="var(--text-secondary)">Round 2</text>
+    <text x="444" y="122" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0660</text>
+    <text x="702" y="122" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0846</text>
+    <text x="960" y="122" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">0.0003</text>
+    <path d="M12 140 H1089" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="166" font-size="14.5" fill="var(--text-secondary)">Round 3</text>
+    <text x="444" y="166" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0659</text>
+    <text x="702" y="166" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0929</text>
+    <text x="960" y="166" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">0.0001</text>
+    <path d="M12 184 H1089" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="210" font-size="14.5" fill="var(--text-secondary)">Round 4</text>
+    <text x="444" y="210" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0658</text>
+    <text x="702" y="210" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0964</text>
+    <text x="960" y="210" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">0.0021</text>
+    <path d="M12 228 H1089" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="254" font-size="14.5" fill="var(--text-secondary)">Round 5</text>
+    <text x="444" y="254" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0001</text>
+    <text x="702" y="254" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0004</text>
+    <text x="960" y="254" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">0.0002</text>
+    <path d="M12 272 H1089" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="298" font-size="14.5" fill="var(--text-secondary)">Round 6</text>
+    <text x="444" y="298" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0002</text>
+    <text x="702" y="298" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">+0.0004</text>
+    <text x="960" y="298" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">0.0002</text>
+    <path d="M12 316 H1089" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="12" y="342" font-size="14.5" fill="var(--text-secondary)">Round 16</text>
+    <text x="444" y="342" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">-0.0002</text>
+    <text x="702" y="342" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">-0.0002</text>
+    <text x="960" y="342" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle" fill="var(--text-primary)">0.0001</text>
+    <path d="M12 360 H1089" stroke="currentColor" stroke-width="1" opacity="0.14" fill="none"/>
+    <text x="550" y="390" font-size="14.5" text-anchor="middle" fill="var(--text-muted)">Lift over baseline. Noise margin is 0.0008 on 1,536,000 bit-predictions per round.</text>
+  </g>
+</svg>

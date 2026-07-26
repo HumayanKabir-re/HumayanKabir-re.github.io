@@ -1,14 +1,14 @@
-"""Generate the SVG figures used in the Mercato write-up.
+"""
+Generate the SVG figures used in the Mercato write-up.
 
-    python tools/build_figures.py
+python tools/build_figures.py
 
-Writes into assets/figures/. The output is generated: edit the specs at the
-bottom of this file and re-run, don't touch the SVG.
+Writes into assets/figures/. The output is generated: edit the specs at the bottom of this file and re-run, don't touch the SVG.
 
-Two reasons this exists rather than hand-drawn SVG or a diagram tool. Hand
-placing coordinates means moving one box breaks its neighbours. Diagram tools
-bake their own palette into the output, and these figures have to follow the
-site theme, so every colour here is emitted as a CSS custom property.
+Two reasons this exists rather than hand-drawn SVG or a diagram tool. 
+Hand placing coordinates means moving one box breaks its neighbours. 
+Diagram tools bake their own palette into the output, and these figures have to follow the site theme. 
+So every colour here is emitted as a CSS custom property.
 """
 
 from __future__ import annotations
@@ -586,74 +586,11 @@ RW_SPECK = BarChart(
     ],
 )
 
-# --- Kavel / Sign language / Symbolic regression --------------------------
-
-KAVEL_PIPE = Flow(
-    name="kv-pipeline",
-    label=(
-        "Intended Kavel pipeline: a seller photo is encoded, matched against comparable "
-        "listings, and the retrieved comparables ground a generated title, description "
-        "and attribute set."
-    ),
-    col_widths=(150, 150, 170, 170),
-    col_gap=60,
-    row_pitch=130,
-    nodes=[
-        Node("photo", "Seller photo", ("one image, no text",), col=0, row=0, dashed=True),
-        Node("enc", "Vision encoder", ("image embedding",), col=1, row=0, muted=True),
-        Node("ret", "Retrieve comparables", ("nearest sold listings",), col=2, row=0),
-        Node("gen", "Grounded generation", ("title, description,", "attributes"), col=3, row=0, accent=True),
-    ],
-    edges=[("photo", "enc"), ("enc", "ret"), ("ret", "gen")],
-    footnote="Retrieval first, generation second. The comparables are what keep the copy honest.",
-)
-
-SL_PIPE = Flow(
-    name="sl-pipeline",
-    label=(
-        "Sign language pipeline: webcam frame, fixed region of interest, running-average "
-        "background subtraction, threshold, largest contour, then a CNN over the 64 by 64 "
-        "binary mask."
-    ),
-    col_widths=(140, 150, 170, 160),
-    col_gap=56,
-    row_pitch=130,
-    nodes=[
-        Node("cam", "Webcam frame", ("flipped, 1 ROI",), col=0, row=0, muted=True),
-        Node("bg", "Background model", ("running average", "over 60 frames"), col=1, row=0),
-        Node("seg", "Segment hand", ("abs-diff, threshold 25,", "largest contour"), col=2, row=0),
-        Node("cnn", "CNN", ("64x64 mask,", "10 classes"), col=3, row=0, accent=True),
-    ],
-    edges=[("cam", "bg"), ("bg", "seg"), ("seg", "cnn")],
-    footnote="The hand is never detected. It is whatever moved after the background settled.",
-)
-
-SR_PIPE = Flow(
-    name="sr-pipeline",
-    label=(
-        "Symbolic regression approach: numeric data is encoded, a transformer proposes "
-        "candidate expressions, and each candidate is scored by fitting its constants "
-        "against the data."
-    ),
-    col_widths=(150, 170, 170, 150),
-    col_gap=60,
-    row_pitch=130,
-    nodes=[
-        Node("data", "(x, y) samples", ("real or synthetic",), col=0, row=0, muted=True),
-        Node("enc", "Set encoder", ("permutation invariant",), col=1, row=0),
-        Node("dec", "Transformer decoder", ("emits expression", "as a token sequence"), col=2, row=0),
-        Node("fit", "Fit and score", ("constants by least", "squares"), col=3, row=0, accent=True),
-    ],
-    edges=[("data", "enc"), ("enc", "dec"), ("dec", "fit")],
-    footnote="The model proposes a shape. Numerical fitting decides whether the shape was right.",
-)
-
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for fig in (ARCHITECTURE, DEPLOYMENT, RETRIEVAL, LONGTAIL,
                 COVERAGE, CHANNEL_COST, RERANKER_FEATURES, DISTRIBUTION,
-                RW_WALL, RW_LEARNERS, RW_REPRO, RW_SPECK,
-                KAVEL_PIPE, SL_PIPE, SR_PIPE):
+                RW_WALL, RW_LEARNERS, RW_REPRO, RW_SPECK):
         path = OUT / f"{fig.name}.svg"
         path.write_text(fig.render() + "\n", encoding="utf-8")
         print(f"{path.relative_to(OUT.parent.parent)}  {path.stat().st_size:,} bytes")

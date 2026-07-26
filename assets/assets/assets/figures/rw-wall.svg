@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1100 450" width="1100" height="450" role="img" aria-label="Lift over the majority baseline by round. Rounds 1 to 4 show 0.078 to 0.096. From round 5 to round 16 lift sits at or below 0.0004, inside the noise margin." xmlns="http://www.w3.org/2000/svg">
+  <g font-family="Sora, sans-serif">
+    <g stroke="currentColor" opacity="0.16" stroke-width="1">
+      <path d="M134 14 V402"/>
+      <path d="M134 402 H1026"/>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="13" fill="var(--text-muted)" text-anchor="middle">
+      <text x="134" y="420">0.00</text>
+      <text x="357" y="420">0.03</text>
+      <text x="580" y="420">0.05</text>
+      <text x="803" y="420">0.07</text>
+      <text x="1026" y="420">0.10</text>
+    </g>
+    <text x="120" y="31" font-size="14.5" text-anchor="end" fill="var(--text-primary)">round 1</text>
+    <rect x="134" y="14" width="699" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="845" y="31" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.0784</text>
+    <text x="120" y="75" font-size="14.5" text-anchor="end" fill="var(--text-primary)">round 2</text>
+    <rect x="134" y="58" width="755" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="901" y="75" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.0846</text>
+    <text x="120" y="119" font-size="14.5" text-anchor="end" fill="var(--text-primary)">round 3</text>
+    <rect x="134" y="102" width="829" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="975" y="119" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.0929</text>
+    <text x="120" y="163" font-size="14.5" text-anchor="end" fill="var(--text-primary)">round 4</text>
+    <rect x="134" y="146" width="860" height="26" rx="3" fill="var(--accent)" opacity="0.9"/>
+    <text x="1006" y="163" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.0964</text>
+    <text x="120" y="207" font-size="14.5" text-anchor="end" fill="var(--text-primary)">round 5</text>
+    <rect x="134" y="190" width="4" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="150" y="207" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.0004</text>
+    <text x="120" y="251" font-size="14.5" text-anchor="end" fill="var(--text-primary)">round 6</text>
+    <rect x="134" y="234" width="4" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="150" y="251" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.0004</text>
+    <text x="120" y="295" font-size="14.5" text-anchor="end" fill="var(--text-primary)">round 8</text>
+    <rect x="134" y="278" width="0" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="146" y="295" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.0000</text>
+    <text x="120" y="339" font-size="14.5" text-anchor="end" fill="var(--text-primary)">round 12</text>
+    <rect x="134" y="322" width="4" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="150" y="339" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.0004</text>
+    <text x="120" y="383" font-size="14.5" text-anchor="end" fill="var(--text-primary)">round 16</text>
+    <rect x="134" y="366" width="0" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="146" y="383" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.0000</text>
+    <text x="580" y="442" font-size="14.5" fill="var(--text-muted)" text-anchor="middle">MLP lift over majority baseline. Dashed marker at 0.0008 is the 95% noise margin.</text>
+  </g>
+</svg>

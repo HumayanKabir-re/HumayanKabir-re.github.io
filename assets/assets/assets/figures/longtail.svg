@@ -1,0 +1,22 @@
+<svg viewBox="0 0 1100 142" width="1100" height="142" role="img" aria-label="NDCG at 10 of 0.5148 on richly judged queries against 0.4131 on the sparsest bucket" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="Sora, sans-serif">
+    <g stroke="currentColor" opacity="0.16" stroke-width="1">
+      <path d="M164 14 V94"/>
+      <path d="M164 94 H1026"/>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="13" fill="var(--text-muted)" text-anchor="middle">
+      <text x="164" y="112">0.00</text>
+      <text x="380" y="112">0.15</text>
+      <text x="595" y="112">0.30</text>
+      <text x="810" y="112">0.45</text>
+      <text x="1026" y="112">0.60</text>
+    </g>
+    <text x="150" y="31" font-size="14.5" text-anchor="end" fill="var(--text-primary)">Richly judged</text>
+    <rect x="164" y="14" width="740" height="26" rx="3" fill="var(--text-secondary)" opacity="0.85"/>
+    <text x="916" y="31" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.5148</text>
+    <text x="150" y="75" font-size="14.5" text-anchor="end" fill="var(--text-primary)">Sparsest bucket</text>
+    <rect x="164" y="58" width="593" height="26" rx="3" fill="var(--accent)" opacity="0.9"/>
+    <text x="769" y="75" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.4131</text>
+    <text x="595" y="134" font-size="14.5" fill="var(--text-muted)" text-anchor="middle">Weighted fusion, NDCG@10 by judgment density</text>
+  </g>
+</svg>

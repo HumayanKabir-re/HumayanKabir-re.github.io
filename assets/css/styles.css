@@ -330,6 +330,7 @@ a {
     color: var(--text-secondary);
     cursor: pointer;
     transition: color var(--ease), background-color var(--ease);
+    /* outline: 1px solid var(--accent); */
     /* border-radius: 2px; */
     color: var(--accent);
 }
@@ -792,9 +793,11 @@ section {
 
 .tag:hover {
     /* background: var(--accent-wash); */
-    background: var(var(--surface-raised) * 10%);
-    color: solid var(--text--primary);
-    border-color: solid var(--accent);
+    /* background: var(var(--surface-raised) * 10%); */
+    /* color: solid var(--text--primary); */
+    /* border-color: solid var(--accent); */
+    border-color: currentColor;
+    color: var(--text-primary);
 }
 
 /* --- Status chips ------------------------------------------------------ */
@@ -1152,6 +1155,10 @@ section {
     transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
 }
 
+.post-card:has(.post-card-title a) {
+    cursor: pointer;
+}
+
 .post-card:hover {
     border-color: var(--accent-wash);
     box-shadow: var(--shadow-md);
@@ -1160,7 +1167,7 @@ section {
     /* border-radius: var(--radius); */
 }
 
-/* One anchor covers the whole card. Nesting a second <a> is invalid and the browser recovers by splitting it, which leaves most of the card dead. */
+/* One anchor covers the whole card.*/
 .post-card-title a::after {
     content: "";
     position: absolute;
