@@ -81,11 +81,13 @@
         if (!target) return;
 
         const phrases = [
-            'ML Engineer',
-            'Search & Retrieval',
-            'LLM & GenAI Developer',
+            'Machine Learning Engineer',
+            'Search and Retrieval Engineer',
+            'AI Solutions Engineer',
             'Data Pipeline Engineer',
-            'DevOps Practitioner'
+            'DevOps Engineer',
+            'Monitoring and Observability Engineer'
+            
         ];
 
         if (reduceMotion.matches) {
