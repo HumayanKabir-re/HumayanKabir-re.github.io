@@ -1,4 +1,4 @@
-"""Generate the SVG figures used in the Mercato write-up.
+"""Generate the SVG figures used in the Mercato Blog.
 
     python tools/build_figures.py
 
