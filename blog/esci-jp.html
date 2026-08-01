@@ -9,6 +9,7 @@
         gtag('config', 'G-NSLRFGYNE6');
     </script>
 
+    <!-- Meta tags for SEO and social sharing start -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESCI-JP: Open image extension for Japanese ESCI locale - Humayan Kabir</title>
@@ -34,22 +35,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Sora:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- Meta tags for SEO and social sharing end -->
 
+    <!-- Auto Detect Theme start -->
     <script>
         (function () {
             var stored = null;
             try { stored = localStorage.getItem('theme'); } catch (e) {}
-            // Explicit choice wins. Otherwise follow the device, so a visitor in
-            // dark mode is not hit with a white screen. Light is the fallback.
             if (!stored) {
                 stored = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             }
             document.documentElement.dataset.theme = stored === 'dark' ? 'dark' : 'light';
         })();
     </script>
+    <!-- Auto Detect Theme end -->
 </head>
 <body>
-    <!-- icon sprite -->
+    <!-- Icon sprite start -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 12H5M11 18l-6-6 6-6"/>
@@ -65,10 +67,11 @@
                               <path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/>
       </symbol>
     </svg>
-    <!-- end icon sprite -->
-
+    <!-- Icon sprite end -->
+    
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
+    <!-- Navigation Bar Start -->
     <nav class="nav" id="navbar" aria-label="Primary">
         <div class="nav-container">
             <a href="../index.html#hero" class="nav-logo">HK<span class="cursor-blink">_</span></a>
@@ -91,15 +94,20 @@
             </div>
         </div>
     </nav>
+    <!-- Navigation Bar End -->
 
     <main id="main-content">
     <article class="post">
         <div class="post-wrap">
+            
+            <!-- Back Link start -->
             <a href="index.html" class="back-link">
                 <svg width="14" height="14" aria-hidden="true"><use href="#arrow-left"/></svg>
                 All posts
             </a>
+            <!-- Back Link end -->
 
+            <!-- Post Header start -->
             <h1 class="post-title">ESCI-JP</h1>
             <p class="post-subtitle">An open image extension for the Japanese locale of the Amazon's Shopping Queries Dataset (SQD or Amazon-ESCI).</p>
             <div class="post-meta">
@@ -108,16 +116,23 @@
                 <span>4 min read</span>
                 <span class="tag">Public Dataset</span>
             </div>
+            <!-- Post Header end -->
 
+            <!-- Post Links start -->
             <div class="post-links">
                 <a href="mercato.html" class="project-link primary">Background: the Mercato Blog</a>
                 <a href="https://github.com/AmazonScience/esci-data" target="_blank" rel="noopener" class="project-link">Amazon ESCI</a>
             </div>
+            <!-- Post Links end -->
+
+            <!-- Post Note start -->
             <p class="post-note">
                 In development. Currently testing the image pipeline. 
                 The downloadable dataset will be provided once the project is finished.
             </p>
+            <!-- Post Note end -->
 
+            <!-- Table of Contents start -->
             <nav class="post-toc" aria-label="Contents">
                 <h2>Contents</h2>
                 <ol>
@@ -129,15 +144,19 @@
                     <li><a href="#status">Where it stands</a></li>
                 </ol>
             </nav>
+            <!-- Table of Contents end -->
 
+            <!-- Post Body start -->
             <div class="post-body">
 
+                <!-- Problem and Introduction Section start -->
                 <h2 id="gap">More text data, weaker system</h2>
 
                 <p>
                     Building <a href="mercato.html">Mercato</a> across English or US and Japanese locales produced a result I did not expect.
                     The Japanese half of the benchmark is larger on every text axis that usually matters, and it still results in a weaker search engine.
                 </p>
+
                 <p>
                     Japanese carries 10,407 queries against English's 8,956 queries. 
                     233,850 products against 164,900 products. 
@@ -149,7 +168,7 @@
                     This impacted everything from retrieval to reranking.
                 </p>
                 
-                <!-- Data Coverage Matrix Figure by Locale -->
+                <!-- Data Coverage Matrix Figure by Locale start -->
                 <figure>
                     <div class="figure-scroll">
                         <svg viewBox="0 0 1100 330" width="1100" height="330" role="img" aria-label="Coverage matrix comparing English and Japanese locales across queries, products, judgments, text index and image vectors. Japanese has more of everything except image vectors, which do not exist." xmlns="http://www.w3.org/2000/svg">
@@ -197,6 +216,7 @@
                         Figure 1. Locale coverage in the data available. Every row favors Japanese except the image one, where nothing exists at all.
                     </figcaption>
                 </figure>
+                <!-- Data Coverage Matrix Figure by Locale end -->
 
                 <p>
                     Two datasets are in play here.
@@ -209,10 +229,13 @@
                     It covers the <strong>US locale only</strong>.
                     No public dataset provides an equivalent for Japanese.
                 </p>
+
                 <p>
                     ESCI-JP is an attempt to fill that one gap.
                 </p>
+                <!-- Problem and Introduction Section end -->
 
+                <!-- Cost of the Gap Section start -->
                 <h2 id="cost">What the gap costs</h2>
 
                 <p>
@@ -223,16 +246,17 @@
                 <p>
                     During development I measured the performance (NDCG@10, NDCG@100, MRR, Recall@10, Recall@100) of the US locale before and after adding the image retrival channel.
                     Then I fused the retrieval channels and compared the cumulative performance of adding individual channels in the pipeline. 
-                    As the figure below shows the NDCG@10 metric, the image channel is the largest cumulative contributor to retrieval performance.
+                    As the figure below shows the NDCG@10 metric, the image channel has a very impactful contribution to retrieval performance.
                     It was more than the difference between the two text fusion methods, and it is the only channel that the Japanese locale does not have.
                 </p>
 
-                <!-- Image Channel Improvements for English -->
+                <!-- NDCG@10 Retrieval Channel Metrics for English start -->
                 <figure>
                     <div class="figure-scroll">
                         <svg viewBox="-20 0 1100 260" width="1100" height="260" role="img" aria-label="NDCG at 10 for English two-way fusion at 0.4545 against three-way fusion at 0.4821, a gain of 0.0276 from adding the image channel" xmlns="http://www.w3.org/2000/svg">
                           <g font-family="Sora, sans-serif">
                            
+                            <!-- x and y axis -->
                             <g stroke="currentColor" opacity="0.16" stroke-width="1">
                               <path d="M184 14 V185"/>
                               <path d="M184 185 H1026"/>
@@ -274,7 +298,10 @@
                             <text x="873" y="163" font-family="JetBrains Mono, monospace" font-size="14.5" font-weight="500" fill="var(--text-primary)">0.4821</text>
                             
                             <!-- In-figure caption -->
-                            <text x="520" y="240" font-size="14.5" fill="var(--text-muted)" text-anchor="middle">English NDCG@10 metrics across different retrieval strategies. The image channel is the largest cumulative retrieval gain in the system.</text>
+                            <text x="520" y="240" font-size="14.5" fill="var(--text-muted)" text-anchor="middle">
+                                English NDCG@10 metrics across different retrieval strategies. 
+                                The image channel has an imptactful cumulative retrieval gain in the system.
+                            </text>
                           </g>
                         </svg>
                     </div>
@@ -283,6 +310,7 @@
                         <br>This gain was larger than the difference between the two text fusion methods.
                     </figcaption>
                 </figure>
+                <!-- NDCG@10 Retrieval Channel Metrics for English end -->
 
                 <p>
                     The loss propagates past retrieval.
@@ -290,7 +318,7 @@
                     With no image channel there are no image features, so the Japanese model trains on eight where the English model has ten.
                 </p>
 
-                <!-- Reranker Feature Count Figure by Locale -->
+                <!-- Reranker Feature Count Figure by Locale start -->
                 <figure>
                     <div class="figure-scroll">
                         <svg viewBox="0 0 1100 170" width="1100" height="170" role="img" aria-label="Reranker feature counts: ten for English, eight for Japanese" xmlns="http://www.w3.org/2000/svg">
@@ -321,6 +349,7 @@
                         Figure 3. The two absent features are the image ones. Nothing else differs between the two models.
                     </figcaption>
                 </figure>
+                <!-- Reranker Feature Count Figure by Locale end -->
 
                 <p>
                     The Japanese reranker also improves its input less than the English one does, gaining 0.0121 NDCG@10 compared with 0.0319 for English.
@@ -333,7 +362,9 @@
                     As a result, ESCI-JP is an attempt to close these gap and bring the Japanese locale up to parity with the English one. 
                     It tries to achieve this by providing a public dataset of product image vectors for Japanese.
                 </p>
+                <!-- Cost of the Gap Section end -->
 
+                <!-- Dataset Structure Section start -->
                 <h2 id="dataset">Dataset Structure</h2>
                 <p>
                     The ESCI-JP dataset will have similar structure to SQID, with similar parquet and csv files, and a similar schema.
@@ -361,7 +392,9 @@
                     The dataset will also include text embeddings for the associated queries, following the same structure as SQID.
                     For each query and each product in Amazon-ESCI, text embeddings will be extracted using the same CLIP model and based on the query text and product title. 
                 </p>
+                <!-- Dataset Structure Section end -->
 
+                <!-- Encoding Section start -->
                 <h2 id="method">Encoding, following SQID</h2>
 
                 <p>
@@ -445,7 +478,9 @@
                 <p>
                     This dataset would not have been possible without the <a href="https://github.com/amazon-research/esci">Amazon Shopping Queries Dataset by Amazon</a>.
                 </p>
+                <!-- Encoding Section end -->
 
+                <!-- Status Section start -->
                 <h2 id="status">Where it stands</h2>
 
                 <p>
@@ -455,16 +490,23 @@
                     It has passed the test scraphing phase and currently testing the entire pipeline on a small slice of the data. 
                     The downloadable dataset will be provided once the project is finished.
                 </p>
+                <!-- Status Section end -->
 
+                <!-- Other Blog Navigation Section start -->
                 <nav class="post-nav" aria-label="Post navigation">
                     <a href="index.html"><span>Back to</span>All posts</a>
                     <a href="mercato.html" class="next"><span>Related</span>Mercato</a>
                 </nav>
+                <!-- Other Blog Navigation Section end -->
+
             </div>
+            <!-- Post Body end -->
+
         </div>
     </article>
     </main>
 
+    <!-- Footer start -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -478,10 +520,13 @@
             </div>
         </div>
     </footer>
+    <!-- Footer end -->
 
+    <!-- Back to top button start -->
     <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">
         <svg width="20" height="20" aria-hidden="true"><use href="#arrow-up"/></svg>
     </button>
+    <!-- Back to top button end -->
 
     <script src="../assets/js/main.js"></script>
 </body>
